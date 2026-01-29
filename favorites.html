@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Favori ürünleriniz - Premium Shop">
+    <title>Favorilerim - Premium Shop</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <p>🎉 Ücretsiz Kargo - 500 TL ve Üzeri Tüm Siparişlerde | 14 Gün İçinde Kolay İade</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>PREMIUM<span>SHOP</span></h1>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li class="has-dropdown">
+                            <a href="#">Kadın</a>
+                            <div class="mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-column">
+                                        <h4>Giyim</h4>
+                                        <ul>
+                                            <li><a href="products.html">Elbise</a></li>
+                                            <li><a href="products.html">Bluz & Gömlek</a></li>
+                                            <li><a href="products.html">Pantolon</a></li>
+                                            <li><a href="products.html">Etek</a></li>
+                                            <li><a href="products.html">Dış Giyim</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <h4>Ayakkabı</h4>
+                                        <ul>
+                                            <li><a href="products.html">Spor Ayakkabı</a></li>
+                                            <li><a href="products.html">Topuklu</a></li>
+                                            <li><a href="products.html">Bot & Çizme</a></li>
+                                            <li><a href="products.html">Sandalet</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <h4>Aksesuar</h4>
+                                        <ul>
+                                            <li><a href="products.html">Çanta</a></li>
+                                            <li><a href="products.html">Takı</a></li>
+                                            <li><a href="products.html">Saat</a></li>
+                                            <li><a href="products.html">Şapka</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#">Erkek</a>
+                            <div class="mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-column">
+                                        <h4>Giyim</h4>
+                                        <ul>
+                                            <li><a href="products.html">T-Shirt</a></li>
+                                            <li><a href="products.html">Gömlek</a></li>
+                                            <li><a href="products.html">Pantolon</a></li>
+                                            <li><a href="products.html">Ceket</a></li>
+                                            <li><a href="products.html">Sweatshirt</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <h4>Ayakkabı</h4>
+                                        <ul>
+                                            <li><a href="products.html">Spor Ayakkabı</a></li>
+                                            <li><a href="products.html">Klasik</a></li>
+                                            <li><a href="products.html">Bot</a></li>
+                                            <li><a href="products.html">Sandalet</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <h4>Aksesuar</h4>
+                                        <ul>
+                                            <li><a href="products.html">Saat</a></li>
+                                            <li><a href="products.html">Cüzdan</a></li>
+                                            <li><a href="products.html">Kemer</a></li>
+                                            <li><a href="products.html">Çanta</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="products.html">Yeni Gelenler</a></li>
+                        <li><a href="products.html">İndirimler</a></li>
+                        <li><a href="#">Markalar</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Search -->
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Ürün ara...">
+                        <i data-feather="search"></i>
+                        <div class="search-suggestions" id="searchSuggestions"></div>
+                    </div>
+
+                    <!-- Icons -->
+                    <div class="header-icons">
+                        <button class="icon-btn" id="themeToggle" title="Tema Değiştir">
+                            <i data-feather="sun"></i>
+                        </button>
+                        <a href="account.html" class="icon-btn" title="Hesabım">
+                            <i data-feather="user"></i>
+                        </a>
+                        <a href="favorites.html" class="icon-btn active" title="Favorilerim">
+                            <i data-feather="heart"></i>
+                            <span class="badge" id="wishlistCount">0</span>
+                        </a>
+                        <a href="#" class="icon-btn" id="cartBtn" title="Sepetim">
+                            <i data-feather="shopping-bag"></i>
+                            <span class="badge" id="cartCount">0</span>
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mini Cart Dropdown -->
+        <div class="mini-cart" id="miniCart">
+            <div class="mini-cart-header">
+                <h3>Sepetim (<span id="miniCartCount">0</span>)</h3>
+                <button class="close-btn" id="closeMiniCart">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="mini-cart-items" id="miniCartItems">
+                <p class="empty-cart">Sepetiniz boş</p>
+            </div>
+            <div class="mini-cart-footer">
+                <div class="subtotal">
+                    <span>Ara Toplam:</span>
+                    <span class="price" id="miniCartTotal">0,00 TL</span>
+                </div>
+                <a href="cart.html" class="btn btn-secondary btn-block">Sepete Git</a>
+                <a href="checkout.html" class="btn btn-primary btn-block">Hemen Al</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Favorites Page Content -->
+    <section class="favorites-page" style="padding: var(--spacing-2xl) 0; min-height: 60vh;">
+        <div class="container">
+            <div class="section-header">
+                <h1>Favorilerim</h1>
+                <p id="favoritesSubtitle">Beğendiğiniz ürünler</p>
+            </div>
+
+            <!-- Favorites Actions -->
+            <div id="favoritesActions" style="display: none; margin-bottom: var(--spacing-lg); text-align: center;">
+                <button class="btn btn-primary" id="addAllToCart">
+                    <i data-feather="shopping-bag"></i>
+                    Tümünü Sepete Ekle
+                </button>
+                <button class="btn btn-secondary" id="clearAllFavorites" style="margin-left: var(--spacing-sm);">
+                    <i data-feather="trash-2"></i>
+                    Tümünü Temizle
+                </button>
+            </div>
+
+            <!-- Favorites Grid -->
+            <div class="products-grid" id="favoritesGrid">
+                <!-- Products will be loaded by JavaScript -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyFavorites" style="display: none; text-align: center; padding: var(--spacing-2xl) 0;">
+                <i data-feather="heart"
+                    style="width: 80px; height: 80px; color: var(--color-text-light); margin: 0 auto var(--spacing-md);"></i>
+                <h2 style="color: var(--color-text-light); margin-bottom: var(--spacing-sm);">Favori ürününüz yok</h2>
+                <p style="color: var(--color-text-light); margin-bottom: var(--spacing-lg);">Beğendiğiniz ürünleri
+                    favorilere ekleyerek kolayca ulaşabilirsiniz</p>
+                <a href="products.html" class="btn btn-primary">Ürünleri Keşfet</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PREMIUMSHOP</h3>
+                    <p>Modern ve kaliteli alışverişin adresi. 2020'den beri müşteri memnuniyeti odaklı hizmet.</p>
+                    <div class="social-links">
+                        <a href="#"><i data-feather="facebook"></i></a>
+                        <a href="#"><i data-feather="instagram"></i></a>
+                        <a href="#"><i data-feather="twitter"></i></a>
+                        <a href="#"><i data-feather="youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Kurumsal</h4>
+                    <ul>
+                        <li><a href="#">Hakkımızda</a></li>
+                        <li><a href="#">İletişim</a></li>
+                        <li><a href="#">Mağazalarımız</a></li>
+                        <li><a href="#">Kariyer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Müşteri Hizmetleri</h4>
+                    <ul>
+                        <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                        <li><a href="#">Kargo ve Teslimat</a></li>
+                        <li><a href="#">İptal ve İade</a></li>
+                        <li><a href="#">Garanti Koşulları</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Yasal</h4>
+                    <ul>
+                        <li><a href="#">Gizlilik Politikası</a></li>
+                        <li><a href="#">Kullanım Koşulları</a></li>
+                        <li><a href="#">KVKK</a></li>
+                        <li><a href="#">Çerez Politikası</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>İletişim</h4>
+                    <ul class="contact-info">
+                        <li><i data-feather="phone"></i> 0850 123 45 67</li>
+                        <li><i data-feather="mail"></i> info@premiumshop.com</li>
+                        <li><i data-feather="map-pin"></i> İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/000000/amex.png" alt="Amex">
+                </div>
+                <p>&copy; 2025 PremiumShop. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Nav -->
+    <div class="mobile-bottom-nav">
+        <a href="index.html">
+            <i data-feather="home"></i>
+            <span>Ana Sayfa</span>
+        </a>
+        <a href="products.html">
+            <i data-feather="grid"></i>
+            <span>Kategoriler</span>
+        </a>
+        <a href="#" id="mobileCartBtn">
+            <i data-feather="shopping-bag"></i>
+            <span>Sepet</span>
+            <span class="badge" id="mobileCartCount">0</span>
+        </a>
+        <a href="account.html">
+            <i data-feather="user"></i>
+            <span>Hesabım</span>
+        </a>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Favorites Page Specific JavaScript
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFavorites();
+        });
+
+        function renderFavorites() {
+            const favoritesGrid = document.getElementById('favoritesGrid');
+            const emptyFavorites = document.getElementById('emptyFavorites');
+            const favoritesActions = document.getElementById('favoritesActions');
+            const favoritesSubtitle = document.getElementById('favoritesSubtitle');
+
+            if (state.wishlist.length === 0) {
+                favoritesGrid.style.display = 'none';
+                favoritesActions.style.display = 'none';
+                emptyFavorites.style.display = 'block';
+                return;
+            }
+
+            favoritesGrid.style.display = 'grid';
+            favoritesActions.style.display = 'block';
+            emptyFavorites.style.display = 'none';
+            favoritesSubtitle.textContent = `${state.wishlist.length} ürün`;
+
+            favoritesGrid.innerHTML = state.wishlist.map(product => createFavoriteCard(product)).join('');
+
+            // Add event listeners
+            favoritesGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const productId = parseInt(e.currentTarget.dataset.id);
+                    addToCart(productId);
+                });
+            });
+
+            favoritesGrid.querySelectorAll('.remove-favorite-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const productId = parseInt(e.currentTarget.dataset.id);
+                    toggleWishlist(productId);
+                    renderFavorites();
+                });
+            });
+
+            feather.replace();
+        }
+
+        function createFavoriteCard(product) {
+            const badgeHTML = product.badge ?
+                `<div class="product-badge ${product.badge}">${product.badge === 'sale' ? 'İNDİRİM' : 'YENİ'}</div>` : '';
+
+            const oldPriceHTML = product.oldPrice ?
+                `<span class="price-old">${formatPrice(product.oldPrice)}</span>` : '';
+
+            const stars = '★'.repeat(Math.floor(product.rating)) + '☆'.repeat(5 - Math.floor(product.rating));
+
+            const safeName = escapeHtml(product.name);
+
+            return `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${safeName}" loading="lazy">
+                        ${badgeHTML}
+                        <div class="product-actions">
+                            <button class="product-action-btn remove-favorite-btn" data-id="${product.id}" title="Favorilerden Çıkar">
+                                <i data-feather="x"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${safeName}</h3>
+                        <div class="product-rating">
+                            ${stars}
+                            <span>(${product.reviews})</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="price-current">${formatPrice(product.price)}</span>
+                            ${oldPriceHTML}
+                        </div>
+                        <button class="add-to-cart-btn" data-id="${product.id}">
+                            <i data-feather="shopping-bag"></i>
+                            Sepete Ekle
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Add all to cart
+        document.getElementById('addAllToCart')?.addEventListener('click', () => {
+            state.wishlist.forEach(product => {
+                addToCart(product.id);
+            });
+            showToast(`${state.wishlist.length} ürün sepete eklendi!`);
+        });
+
+        // Clear all favorites
+        document.getElementById('clearAllFavorites')?.addEventListener('click', () => {
+            if (confirm('Tüm favorileri temizlemek istediğinizden emin misiniz?')) {
+                state.wishlist = [];
+                saveWishlist();
+                updateWishlistCount();
+                renderFavorites();
+                showToast('Tüm favoriler temizlendi');
+            }
+        });
+    </script>
+</body>
+
+</html>

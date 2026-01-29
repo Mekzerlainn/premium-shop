@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepetim - Premium Shop</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <p>🎉 Ücretsiz Kargo - 500 TL ve Üzeri Tüm Siparişlerde</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>PREMIUM<span>SHOP</span></h1>
+                    </a>
+                </div>
+                <div class="header-icons">
+                    <button class="icon-btn" id="themeToggle" title="Tema Değiştir">
+                        <i data-feather="sun"></i>
+                    </button>
+                    <a href="index.html" class="icon-btn">
+                        <i data-feather="home"></i>
+                    </a>
+                    <a href="account.html" class="icon-btn">
+                        <i data-feather="user"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Ana Sayfa</a>
+            <i data-feather="chevron-right"></i>
+            <span>Sepetim</span>
+        </div>
+    </div>
+
+    <!-- Cart Page -->
+    <section class="cart-page">
+        <div class="container">
+            <h1 class="page-title">Sepetim</h1>
+
+            <div class="cart-layout" id="cartLayout">
+                <!-- Cart Items -->
+                <div class="cart-items" id="cartItemsContainer">
+                    <!-- Items will be loaded by JavaScript -->
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <h3>Sipariş Özeti</h3>
+
+                    <div class="summary-row">
+                        <span>Ara Toplam</span>
+                        <span id="subtotal">0,00 TL</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Kargo</span>
+                        <span id="shipping" class="success">Ücretsiz</span>
+                    </div>
+
+                    <div class="summary-row discount">
+                        <span>İndirim</span>
+                        <span id="discount">0,00 TL</span>
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <div class="summary-row total">
+                        <span>Toplam</span>
+                        <span id="total">0,00 TL</span>
+                    </div>
+
+                    <!-- Coupon -->
+                    <div class="coupon-section">
+                        <input type="text" id="couponInput" placeholder="İndirim kodu">
+                        <button class="btn btn-secondary" id="applyCoupon">Uygula</button>
+                    </div>
+
+                    <!-- Free Shipping Progress -->
+                    <div class="free-shipping-progress">
+                        <p id="shippingMessage">Ücretsiz kargo için <strong id="remainingAmount">0 TL</strong> daha
+                            alışveriş yapın!</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+
+                    <a href="checkout.html" class="btn btn-primary btn-block btn-large" id="checkoutBtn">
+                        <i data-feather="lock"></i>
+                        Güvenli Ödemeye Geç
+                    </a>
+
+                    <a href="products.html" class="continue-shopping">
+                        <i data-feather="arrow-left"></i>
+                        Alışverişe Devam Et
+                    </a>
+
+                    <!-- Trust Badges -->
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <i data-feather="truck"></i>
+                            <span>Ücretsiz Kargo</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i data-feather="refresh-cw"></i>
+                            <span>Kolay İade</span>
+                        </div>
+                        <div class="trust-badge">
+                            <i data-feather="shield"></i>
+                            <span>Güvenli Ödeme</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty Cart -->
+            <div class="empty-cart" id="emptyCart" style="display: none;">
+                <i data-feather="shopping-bag"></i>
+                <h2>Sepetiniz Boş</h2>
+                <p>Henüz sepetinize ürün eklemediniz</p>
+                <a href="products.html" class="btn btn-primary btn-large">Alışverişe Başla</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PREMIUMSHOP</h3>
+                    <p>Modern ve kaliteli alışverişin adresi.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Müşteri Hizmetleri</h4>
+                    <ul>
+                        <li><a href="#">SSS</a></li>
+                        <li><a href="#">İptal ve İade</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PremiumShop. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme - Premium Shop</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="checkout.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>PREMIUM<span>SHOP</span></h1>
+                    </a>
+                </div>
+                <div class="checkout-steps">
+                    <div class="step active">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Bilgiler</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Kargo</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Ödeme</span>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step">
+                        <span class="step-number">4</span>
+                        <span class="step-label">Onay</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Checkout Page -->
+    <section class="checkout-page">
+        <div class="container">
+            <div class="checkout-layout">
+                <!-- Checkout Form -->
+                <div class="checkout-form">
+                    <form id="checkoutForm">
+                        <!-- Customer Info -->
+                        <div class="form-section">
+                            <h2>İletişim Bilgileri</h2>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ad *</label>
+                                    <input type="text" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Soyad *</label>
+                                    <input type="text" name="lastName" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>E-posta *</label>
+                                <input type="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Telefon *</label>
+                                <input type="tel" name="phone" required>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Address -->
+                        <div class="form-section">
+                            <h2>Teslimat Adresi</h2>
+                            <div class="form-group">
+                                <label>Adres Başlığı *</label>
+                                <input type="text" name="addressTitle" placeholder="Ev, İş, vb.">
+                            </div>
+                            <div class="form-group">
+                                <label>Adres *</label>
+                                <textarea name="address" rows="3" required></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>İl *</label>
+                                    <select name="city" required>
+                                        <option value="">Seçiniz</option>
+                                        <option value="Istanbul">İstanbul</option>
+                                        <option value="Ankara">Ankara</option>
+                                        <option value="Izmir">İzmir</option>
+                                        <option value="Bursa">Bursa</option>
+                                        <option value="Antalya">Antalya</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>İlçe *</label>
+                                    <select name="district" required>
+                                        <option value="">Seçiniz</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="sameBilling" checked>
+                                    <span>Fatura adresi teslimat adresi ile aynı</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Shipping Method -->
+                        <div class="form-section">
+                            <h2>Kargo Yöntemi</h2>
+                            <div class="shipping-options">
+                                <label class="shipping-option">
+                                    <input type="radio" name="shipping" value="standard" checked>
+                                    <div class="shipping-info">
+                                        <div>
+                                            <strong>Standart Kargo</strong>
+                                            <p>3-5 iş günü</p>
+                                        </div>
+                                        <span class="shipping-price">Ücretsiz</span>
+                                    </div>
+                                </label>
+                                <label class="shipping-option">
+                                    <input type="radio" name="shipping" value="express">
+                                    <div class="shipping-info">
+                                        <div>
+                                            <strong>Hızlı Kargo</strong>
+                                            <p>1-2 iş günü</p>
+                                        </div>
+                                        <span class="shipping-price">29,90 TL</span>
+                                    </div>
+                                </label>
+                                <label class="shipping-option">
+                                    <input type="radio" name="shipping" value="sameday">
+                                    <div class="shipping-info">
+                                        <div>
+                                            <strong>Aynı Gün Teslimat</strong>
+                                            <p>Bugün teslim</p>
+                                        </div>
+                                        <span class="shipping-price">49,90 TL</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="form-section">
+                            <h2>Ödeme Yöntemi</h2>
+                            <div class="payment-options">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="card" checked>
+                                    <div class="payment-info">
+                                        <i data-feather="credit-card"></i>
+                                        <span>Kredi/Banka Kartı</span>
+                                    </div>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="transfer">
+                                    <div class="payment-info">
+                                        <i data-feather="dollar-sign"></i>
+                                        <span>Havale/EFT</span>
+                                    </div>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="cod">
+                                    <div class="payment-info">
+                                        <i data-feather="package"></i>
+                                        <span>Kapıda Ödeme</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Card Form -->
+                            <div class="card-form" id="cardForm">
+                                <div class="form-group">
+                                    <label>Kart Üzerindeki İsim *</label>
+                                    <input type="text" name="cardName">
+                                </div>
+                                <div class="form-group">
+                                    <label>Kart Numarası *</label>
+                                    <input type="text" name="cardNumber" placeholder="1234 5678 9012 3456"
+                                        maxlength="19">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Son Kullanma Tarihi *</label>
+                                        <input type="text" name="cardExpiry" placeholder="AA/YY" maxlength="5">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>CVV *</label>
+                                        <input type="text" name="cardCvv" placeholder="123" maxlength="3">
+                                    </div>
+                                </div>
+                                <div class="card-logos">
+                                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                                    <img src="https://img.icons8.com/color/48/000000/amex.png" alt="Amex">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Note -->
+                        <div class="form-section">
+                            <h2>Sipariş Notu (Opsiyonel)</h2>
+                            <div class="form-group">
+                                <textarea name="orderNote" rows="3"
+                                    placeholder="Siparişiniz hakkında not ekleyin..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Terms -->
+                        <div class="form-section">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="terms" required>
+                                <span>
+                                    <a href="#">Kullanım Koşulları</a> ve
+                                    <a href="#">Gizlilik Politikası</a>'nı okudum, kabul ediyorum
+                                </span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-large">
+                            <i data-feather="lock"></i>
+                            Siparişi Tamamla
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h3>Sipariş Özeti</h3>
+
+                    <div class="summary-items" id="summaryItems">
+                        <!-- Items will be loaded by JavaScript -->
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <div class="summary-row">
+                        <span>Ara Toplam</span>
+                        <span id="summarySubtotal">0,00 TL</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Kargo</span>
+                        <span id="summaryShipping">Ücretsiz</span>
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <div class="summary-row total">
+                        <span>Toplam</span>
+                        <span id="summaryTotal">0,00 TL</span>
+                    </div>
+
+                    <!-- Security Badges -->
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <i data-feather="shield"></i>
+                            <span>256-bit SSL Şifreleme</span>
+                        </div>
+                        <div class="security-badge">
+                            <i data-feather="lock"></i>
+                            <span>Güvenli Ödeme</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+    <script src="checkout.js"></script>
+</body>
+
+</html>

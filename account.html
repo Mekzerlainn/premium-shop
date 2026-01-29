@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesabım - Premium Shop</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="account.css">
+</head>
+
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <p>🎉 Ücretsiz Kargo - 500 TL ve Üzeri Tüm Siparişlerde</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>PREMIUM<span>SHOP</span></h1>
+                    </a>
+                </div>
+                <div class="header-icons">
+                    <button class="icon-btn" id="themeToggle" title="Tema Değiştir">
+                        <i data-feather="sun"></i>
+                    </button>
+                    <a href="index.html" class="icon-btn">
+                        <i data-feather="home"></i>
+                    </a>
+                    <a href="#" class="icon-btn" id="cartBtn">
+                        <i data-feather="shopping-bag"></i>
+                        <span class="badge" id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mini Cart -->
+        <div class="mini-cart" id="miniCart">
+            <div class="mini-cart-header">
+                <h3>Sepetim (<span id="miniCartCount">0</span>)</h3>
+                <button class="close-btn" id="closeMiniCart">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="mini-cart-items" id="miniCartItems">
+                <p class="empty-cart">Sepetiniz boş</p>
+            </div>
+            <div class="mini-cart-footer">
+                <div class="subtotal">
+                    <span>Ara Toplam:</span>
+                    <span class="price" id="miniCartTotal">0,00 TL</span>
+                </div>
+                <a href="cart.html" class="btn btn-secondary btn-block">Sepete Git</a>
+                <a href="checkout.html" class="btn btn-primary btn-block">Hemen Al</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Account Page -->
+    <section class="account-page">
+        <div class="container">
+            <h1 class="page-title">Hesabım</h1>
+
+            <div class="account-layout">
+                <!-- Sidebar Menu -->
+                <aside class="account-sidebar">
+                    <div class="account-user">
+                        <div class="user-avatar">
+                            <i data-feather="user"></i>
+                        </div>
+                        <div class="user-info">
+                            <h3>Ahmet Yılmaz</h3>
+                            <p>ahmet@example.com</p>
+                        </div>
+                    </div>
+
+                    <nav class="account-menu">
+                        <a href="#dashboard" class="menu-item active" data-tab="dashboard">
+                            <i data-feather="home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#orders" class="menu-item" data-tab="orders">
+                            <i data-feather="package"></i>
+                            <span>Siparişlerim</span>
+                        </a>
+                        <a href="#wishlist" class="menu-item" data-tab="wishlist">
+                            <i data-feather="heart"></i>
+                            <span>Favorilerim</span>
+                        </a>
+                        <a href="#addresses" class="menu-item" data-tab="addresses">
+                            <i data-feather="map-pin"></i>
+                            <span>Adreslerim</span>
+                        </a>
+                        <a href="#profile" class="menu-item" data-tab="profile">
+                            <i data-feather="settings"></i>
+                            <span>Hesap Bilgileri</span>
+                        </a>
+                        <a href="index.html" class="menu-item logout">
+                            <i data-feather="log-out"></i>
+                            <span>Çıkış Yap</span>
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Content Area -->
+                <div class="account-content">
+                    <!-- Dashboard Tab -->
+                    <div class="tab-content active" id="dashboard">
+                        <h2>Hoş Geldiniz, Ahmet!</h2>
+
+                        <div class="dashboard-cards">
+                            <div class="dashboard-card">
+                                <i data-feather="package"></i>
+                                <div>
+                                    <h3>12</h3>
+                                    <p>Toplam Sipariş</p>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <i data-feather="heart"></i>
+                                <div>
+                                    <h3>8</h3>
+                                    <p>Favori Ürün</p>
+                                </div>
+                            </div>
+                            <div class="dashboard-card">
+                                <i data-feather="map-pin"></i>
+                                <div>
+                                    <h3>3</h3>
+                                    <p>Kayıtlı Adres</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="recent-orders">
+                            <h3>Son Siparişler</h3>
+                            <div class="order-list">
+                                <div class="order-item">
+                                    <div class="order-info">
+                                        <strong>#12345</strong>
+                                        <span>15 Ocak 2025</span>
+                                    </div>
+                                    <div class="order-status success">Teslim Edildi</div>
+                                    <div class="order-total">1.299,00 TL</div>
+                                </div>
+                                <div class="order-item">
+                                    <div class="order-info">
+                                        <strong>#12344</strong>
+                                        <span>10 Ocak 2025</span>
+                                    </div>
+                                    <div class="order-status warning">Kargoda</div>
+                                    <div class="order-total">899,00 TL</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Orders Tab -->
+                    <div class="tab-content" id="orders">
+                        <h2>Siparişlerim</h2>
+
+                        <div class="orders-filter">
+                            <button class="filter-btn active">Tümü</button>
+                            <button class="filter-btn">Aktif</button>
+                            <button class="filter-btn">Tamamlanan</button>
+                            <button class="filter-btn">İptal Edilen</button>
+                        </div>
+
+                        <div class="orders-list">
+                            <div class="order-card">
+                                <div class="order-header">
+                                    <div>
+                                        <strong>Sipariş #12345</strong>
+                                        <span>15 Ocak 2025</span>
+                                    </div>
+                                    <div class="order-status success">Teslim Edildi</div>
+                                </div>
+                                <div class="order-items">
+                                    <div class="order-product">
+                                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=100&h=100&fit=crop"
+                                            alt="Ürün">
+                                        <div>
+                                            <h4>Premium Deri Ceket</h4>
+                                            <p>Adet: 1</p>
+                                        </div>
+                                        <span>1.299,00 TL</span>
+                                    </div>
+                                </div>
+                                <div class="order-footer">
+                                    <div class="order-total">Toplam: <strong>1.299,00 TL</strong></div>
+                                    <div class="order-actions">
+                                        <button class="btn btn-secondary">Detayları Gör</button>
+                                        <button class="btn btn-secondary">Fatura İndir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Tab -->
+                    <div class="tab-content" id="wishlist">
+                        <h2>Favorilerim</h2>
+                        <div class="wishlist-grid" id="wishlistGrid">
+                            <p class="empty-message">Favori listeniz boş</p>
+                        </div>
+                    </div>
+
+                    <!-- Addresses Tab -->
+                    <div class="tab-content" id="addresses">
+                        <h2>Adreslerim</h2>
+
+                        <button class="btn btn-primary" style="margin-bottom: 24px;">
+                            <i data-feather="plus"></i>
+                            Yeni Adres Ekle
+                        </button>
+
+                        <div class="addresses-grid">
+                            <div class="address-card">
+                                <div class="address-header">
+                                    <strong>Ev Adresi</strong>
+                                    <span class="badge-default">Varsayılan</span>
+                                </div>
+                                <p>Ahmet Yılmaz</p>
+                                <p>Atatürk Caddesi No:123 Daire:4</p>
+                                <p>Kadıköy, İstanbul</p>
+                                <p>+90 555 123 4567</p>
+                                <div class="address-actions">
+                                    <button class="btn btn-secondary">Düzenle</button>
+                                    <button class="btn btn-secondary">Sil</button>
+                                </div>
+                            </div>
+
+                            <div class="address-card">
+                                <div class="address-header">
+                                    <strong>İş Adresi</strong>
+                                </div>
+                                <p>Ahmet Yılmaz</p>
+                                <p>İş Merkezi Kat:5 No:12</p>
+                                <p>Şişli, İstanbul</p>
+                                <p>+90 555 123 4567</p>
+                                <div class="address-actions">
+                                    <button class="btn btn-secondary">Düzenle</button>
+                                    <button class="btn btn-secondary">Sil</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Tab -->
+                    <div class="tab-content" id="profile">
+                        <h2>Hesap Bilgileri</h2>
+
+                        <form class="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Ad</label>
+                                    <input type="text" value="Ahmet">
+                                </div>
+                                <div class="form-group">
+                                    <label>Soyad</label>
+                                    <input type="text" value="Yılmaz">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>E-posta</label>
+                                <input type="email" value="ahmet@example.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Telefon</label>
+                                <input type="tel" value="+90 555 123 4567">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Doğum Tarihi</label>
+                                <input type="date" value="1990-01-15">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+                        </form>
+
+                        <div class="password-section">
+                            <h3>Şifre Değiştir</h3>
+                            <form class="password-form">
+                                <div class="form-group">
+                                    <label>Mevcut Şifre</label>
+                                    <input type="password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Yeni Şifre</label>
+                                    <input type="password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Yeni Şifre (Tekrar)</label>
+                                    <input type="password">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Şifreyi Güncelle</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PREMIUMSHOP</h3>
+                    <p>Modern ve kaliteli alışverişin adresi.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PremiumShop. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+    <script src="account.js"></script>
+</body>
+
+</html>
