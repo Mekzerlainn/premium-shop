@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ürün Detayı - Premium Shop">
+    <title>Ürün Detayı - Premium Shop</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="product-detail.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+</head>
+
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        <div class="container">
+            <p data-i18n="header.free_shipping">🎉 Ücretsiz Kargo - 500 TL ve Üzeri Tüm Siparişlerde | 14 Gün İçinde
+                Kolay İade</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>PREMIUM<span>SHOP</span></h1>
+                    </a>
+                </div>
+
+                <!-- Auth Container -->
+                <div id="auth-container" style="margin-left: 20px;"></div>
+
+                <!-- Navigation -->
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li class="has-dropdown">
+                            <a href="#" data-i18n="nav.women">Kadın</a>
+                            <div class="mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-column">
+                                        <h4>Giyim</h4>
+                                        <ul>
+                                            <li><a href="products.html">Elbise</a></li>
+                                            <li><a href="products.html">Bluz & Gömlek</a></li>
+                                            <li><a href="products.html">Pantolon</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="has-dropdown">
+                            <a href="#" data-i18n="nav.men">Erkek</a>
+                            <div class="mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="mega-menu-column">
+                                        <h4>Giyim</h4>
+                                        <ul>
+                                            <li><a href="products.html">T-Shirt</a></li>
+                                            <li><a href="products.html">Gömlek</a></li>
+                                            <li><a href="products.html">Pantolon</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="products.html" data-i18n="nav.new_arrivals">Yeni Gelenler</a></li>
+                        <li><a href="products.html" data-i18n="nav.discounts">İndirimler</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <!-- Search -->
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Ürün ara...">
+                        <i data-feather="search"></i>
+                        <div class="search-suggestions" id="searchSuggestions"></div>
+                    </div>
+
+                    <!-- Icons -->
+                    <div class="header-icons">
+                        <button class="icon-btn" id="themeToggle" title="Tema Değiştir">
+                            <i data-feather="sun"></i>
+                        </button>
+                        <a href="account.html" class="icon-btn" id="authButton" title="Hesabım">
+                            <i data-feather="user"></i>
+                        </a>
+                        <a href="favorites.html" class="icon-btn" title="Favorilerim">
+                            <i data-feather="heart"></i>
+                            <span class="badge" id="wishlistCount">0</span>
+                        </a>
+                        <a href="#" class="icon-btn" id="cartBtn" title="Sepetim">
+                            <i data-feather="shopping-bag"></i>
+                            <span class="badge" id="cartCount">0</span>
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mini Cart Dropdown -->
+        <div class="mini-cart" id="miniCart">
+            <div class="mini-cart-header">
+                <h3>Sepetim (<span id="miniCartCount">0</span>)</h3>
+                <button class="close-btn" id="closeMiniCart">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="mini-cart-items" id="miniCartItems">
+                <p class="empty-cart">Sepetiniz boş</p>
+            </div>
+            <div class="mini-cart-footer">
+                <div class="subtotal">
+                    <span>Ara Toplam:</span>
+                    <span class="price" id="miniCartTotal">0,00 TL</span>
+                </div>
+                <a href="cart.html" class="btn btn-secondary btn-block">Sepete Git</a>
+                <a href="checkout.html" class="btn btn-primary btn-block">Hemen Al</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb-nav">
+        <div class="container">
+            <ul class="breadcrumb" id="breadcrumb">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="products.html">Ürünler</a></li>
+                <li id="breadcrumbProduct">Ürün</li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Product Detail Section -->
+    <section class="product-detail-section">
+        <div class="container">
+            <div class="product-detail-grid">
+                <!-- Product Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image-container">
+                        <img src="" alt="Ürün" id="mainImage" class="main-image">
+                        <div class="image-zoom-lens"></div>
+                    </div>
+                    <div class="thumbnail-strip" id="thumbnailStrip">
+                        <!-- Thumbnails will be added by JS -->
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-info-detail">
+                    <!-- Badge -->
+                    <div class="product-badges" id="productBadges"></div>
+
+                    <!-- Title -->
+                    <h1 class="product-title-detail" id="productTitle">Ürün Adı</h1>
+
+                    <!-- Rating -->
+                    <div class="product-rating-detail" id="productRating">
+                        <div class="stars"></div>
+                        <span class="rating-text"></span>
+                        <a href="#reviews" class="review-link">Yorumları Gör</a>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="product-price-detail" id="productPrice">
+                        <span class="current-price"></span>
+                        <span class="old-price"></span>
+                        <span class="discount-badge"></span>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="product-description" id="productDescription"></p>
+
+                    <!-- Features -->
+                    <div class="product-features" id="productFeatures">
+                        <!-- Features will be added by JS -->
+                    </div>
+
+                    <!-- Variants -->
+                    <div class="variant-selectors">
+                        <!-- Color Selector -->
+                        <div class="variant-group" id="colorSelector">
+                            <label>Renk: <span id="selectedColorName"></span></label>
+                            <div class="color-options" id="colorOptions">
+                                <!-- Colors will be added by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Size Selector -->
+                        <div class="variant-group" id="sizeSelector">
+                            <label>Beden: <span id="selectedSizeName"></span></label>
+                            <div class="size-options" id="sizeOptions">
+                                <!-- Sizes will be added by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stock Info -->
+                    <div class="stock-info" id="stockInfo">
+                        <i data-feather="check-circle"></i>
+                        <span></span>
+                    </div>
+
+                    <!-- Quantity & Add to Cart -->
+                    <div class="purchase-actions">
+                        <div class="quantity-selector-detail">
+                            <button class="qty-btn" id="qtyDecrease">-</button>
+                            <input type="number" id="quantity" value="1" min="1" max="10">
+                            <button class="qty-btn" id="qtyIncrease">+</button>
+                        </div>
+                        <button class="btn btn-primary btn-lg add-to-cart-detail" id="addToCartBtn">
+                            <i data-feather="shopping-bag"></i>
+                            Sepete Ekle
+                        </button>
+                        <button class="btn btn-secondary wishlist-detail" id="wishlistBtn">
+                            <i data-feather="heart"></i>
+                        </button>
+                        <button class="btn btn-secondary compare-detail" id="compareBtn" title="Karşılaştır"
+                            style="margin-left: 10px;">
+                            <i data-feather="columns"></i>
+                        </button>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="share-product">
+                        <span>Paylaş:</span>
+                        <div class="share-buttons">
+                            <button class="share-btn" title="Facebook">
+                                <i data-feather="facebook"></i>
+                            </button>
+                            <button class="share-btn" title="Twitter">
+                                <i data-feather="twitter"></i>
+                            </button>
+                            <button class="share-btn" title="WhatsApp">
+                                <i data-feather="message-circle"></i>
+                            </button>
+                            <button class="share-btn" id="copyLinkBtn" title="Linki Kopyala">
+                                <i data-feather="link"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Info -->
+                    <div class="delivery-info">
+                        <div class="delivery-item">
+                            <i data-feather="truck"></i>
+                            <div>
+                                <strong>Ücretsiz Kargo</strong>
+                                <span>500 TL üzeri siparişlerde</span>
+                            </div>
+                        </div>
+                        <div class="delivery-item">
+                            <i data-feather="refresh-cw"></i>
+                            <div>
+                                <strong>Kolay İade</strong>
+                                <span>14 gün içinde ücretsiz iade</span>
+                            </div>
+                        </div>
+                        <div class="delivery-item">
+                            <i data-feather="shield"></i>
+                            <div>
+                                <strong>Güvenli Ödeme</strong>
+                                <span>256-bit SSL şifreleme</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="reviews-section" id="reviews">
+                <h2 class="section-title">Müşteri Yorumları</h2>
+
+                <!-- Review Summary -->
+                <div class="review-summary" id="reviewSummary">
+                    <div class="rating-overview">
+                        <div class="average-rating">
+                            <span class="big-rating" id="avgRating">0.0</span>
+                            <div class="stars" id="avgStars"></div>
+                            <span class="total-reviews" id="totalReviews">0 yorum</span>
+                        </div>
+                        <div class="rating-bars" id="ratingBars">
+                            <!-- Rating distribution bars -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Write Review -->
+                <div class="write-review" id="writeReview">
+                    <h3>Yorum Yaz</h3>
+                    <form id="reviewForm">
+                        <div class="form-group">
+                            <label>Puanınız</label>
+                            <div class="star-rating-input" id="starRatingInput">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </div>
+                            <input type="hidden" id="ratingInput" value="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewerName">Adınız</label>
+                            <input type="text" id="reviewerName" required placeholder="Adınızı girin">
+                        </div>
+                        <div class="form-group">
+                            <label for="reviewComment">Yorumunuz</label>
+                            <textarea id="reviewComment" rows="4" required
+                                placeholder="Ürün hakkında düşüncelerinizi paylaşın..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Yorumu Gönder</button>
+                    </form>
+                </div>
+
+                <!-- Reviews List -->
+                <div class="reviews-list" id="reviewsList">
+                    <!-- Reviews will be loaded by JS -->
+                </div>
+            </div>
+
+            <!-- Related Products -->
+            <div class="related-products">
+                <h2 class="section-title">Benzer Ürünler</h2>
+                <div class="products-grid" id="relatedProducts">
+                    <!-- Related products will be loaded by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PREMIUMSHOP</h3>
+                    <p>Modern ve kaliteli alışverişin adresi. 2020'den beri müşteri memnuniyeti odaklı hizmet.</p>
+                    <div class="social-links">
+                        <a href="#"><i data-feather="facebook"></i></a>
+                        <a href="#"><i data-feather="instagram"></i></a>
+                        <a href="#"><i data-feather="twitter"></i></a>
+                        <a href="#"><i data-feather="youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Kurumsal</h4>
+                    <ul>
+                        <li><a href="#">Hakkımızda</a></li>
+                        <li><a href="#">İletişim</a></li>
+                        <li><a href="#">Mağazalarımız</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Müşteri Hizmetleri</h4>
+                    <ul>
+                        <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                        <li><a href="#">Kargo ve Teslimat</a></li>
+                        <li><a href="#">İptal ve İade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>İletişim</h4>
+                    <ul class="contact-info">
+                        <li><i data-feather="phone"></i> 0850 123 45 67</li>
+                        <li><i data-feather="mail"></i> info@premiumshop.com</li>
+                        <li><i data-feather="map-pin"></i> İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa">
+                    <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard">
+                    <img src="https://img.icons8.com/color/48/000000/amex.png" alt="Amex">
+                </div>
+                <p>&copy; 2025 PremiumShop. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Nav -->
+    <div class="mobile-bottom-nav">
+        <a href="index.html">
+            <i data-feather="home"></i>
+            <span>Ana Sayfa</span>
+        </a>
+        <a href="products.html">
+            <i data-feather="grid"></i>
+            <span>Kategoriler</span>
+        </a>
+        <a href="#" id="mobileCartBtn">
+            <i data-feather="shopping-bag"></i>
+            <span>Sepet</span>
+            <span class="badge" id="mobileCartCount">0</span>
+        </a>
+        <a href="account.html">
+            <i data-feather="user"></i>
+            <span>Hesabım</span>
+        </a>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="compare.js"></script>
+    <script src="i18n.js"></script>
+    <script src="product-detail.js"></script>
+    <script>
+        // Initialize auth
+        document.addEventListener('DOMContentLoaded', () => {
+            initSupabase();
+            initAuth();
+
+            // Auto-fill reviewer name if logged in
+            setTimeout(() => {
+                const user = getCurrentUser();
+                if (user) {
+                    const reviewerNameInput = document.getElementById('reviewerName');
+                    if (reviewerNameInput && !reviewerNameInput.value) {
+                        reviewerNameInput.value = user.user_metadata?.full_name || user.email.split('@')[0];
+                    }
+                }
+            }, 500);
+        });
+    </script>
+</body>
+
+</html>

@@ -748,6 +748,21 @@ section {
     min-width: 280px;
 }
 
+/* Product Card Links */
+.product-image-link {
+    display: block;
+    text-decoration: none;
+}
+
+.product-info a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-info a:hover .product-title {
+    color: var(--color-accent);
+}
+
 .product-card:hover {
     transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
@@ -1489,4 +1504,29 @@ body.dark-mode .toast {
 .animate-on-scroll.animated {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Auth Header Button */
+.btn-header-auth {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: var(--color-primary);
+    color: var(--color-secondary) !important;
+    border-radius: 50px;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    transition: all var(--transition-fast);
+}
+
+.btn-header-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    opacity: 0.9;
+}
+
+.btn-header-auth i {
+    width: 16px;
+    height: 16px;
 }

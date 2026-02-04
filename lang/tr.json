@@ -1,0 +1,44 @@
+{
+    "nav": {
+        "home": "Ana Sayfa",
+        "collection": "Koleksiyon",
+        "women": "Kadın",
+        "men": "Erkek",
+        "new_arrivals": "Yeni Gelenler",
+        "discounts": "İndirimler",
+        "brands": "Markalar",
+        "about": "Hakkımızda",
+        "contact": "İletişim"
+    },
+    "header": {
+        "search_placeholder": "Ürün ara...",
+        "login": "Giriş Yap",
+        "account": "Hesabım",
+        "cart": "Sepetim",
+        "compare": "Karşılaştır",
+        "logout": "Çıkış Yap",
+        "orders": "Siparişlerim",
+        "favorites": "Favorilerim",
+        "free_shipping": "🎉 Ücretsiz Kargo - 500 TL ve Üzeri Tüm Siparişlerde"
+    },
+    "hero": {
+        "title": "Yeni Sezon",
+        "subtitle": "En trend parçaları keşfedin",
+        "btn_shop": "Alışverişe Başla"
+    },
+    "common": {
+        "add_to_cart": "Sepete Ekle",
+        "view_details": "İncele",
+        "sale": "İNDİRİM",
+        "new": "YENİ",
+        "price": "Fiyat",
+        "out_of_stock": "Stokta Yok"
+    },
+    "footer": {
+        "about_text": "Modern ve kaliteli alışverişin adresi.",
+        "corporate": "Kurumsal",
+        "customer_service": "Müşteri Hizmetleri",
+        "contact_us": "Bize Ulaşın",
+        "rights": "Tüm hakları saklıdır."
+    }
+}

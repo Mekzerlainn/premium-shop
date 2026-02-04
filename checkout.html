@@ -13,7 +13,11 @@
 
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
     <link rel="stylesheet" href="checkout.css">
 </head>
 
@@ -285,8 +289,33 @@
 
     <div class="toast" id="toast"></div>
 
+    <script src="config.js"></script>
     <script src="script.js"></script>
+    <script src="auth.js"></script>
     <script src="checkout.js"></script>
+    <script>
+        // Initialize auth and auto-fill user info
+        document.addEventListener('DOMContentLoaded', async () => {
+            initSupabase();
+            await initAuth();
+
+            // Wait for auth state
+            setTimeout(() => {
+                const user = getCurrentUser();
+                if (user) {
+                    // Auto-fill user info
+                    const nameParts = (user.user_metadata?.full_name || '').split(' ');
+                    const firstNameInput = document.querySelector('input[name="firstName"]');
+                    const lastNameInput = document.querySelector('input[name="lastName"]');
+                    const emailInput = document.querySelector('input[name="email"]');
+
+                    if (firstNameInput && nameParts[0]) firstNameInput.value = nameParts[0];
+                    if (lastNameInput && nameParts.length > 1) lastNameInput.value = nameParts.slice(1).join(' ');
+                    if (emailInput) emailInput.value = user.email || '';
+                }
+            }, 500);
+        });
+    </script>
 </body>
 
 </html>

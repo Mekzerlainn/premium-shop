@@ -18,13 +18,18 @@
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
 
     <!-- SEO & Social -->
     <link rel="canonical" href="https://example.com/">
     <meta property="og:title" content="Premium Shop - Modern E-Ticaret">
-    <meta property="og:description" content="Modern ve profesyonel e-ticaret sitesi - En kaliteli ürünler, hızlı kargo.">
+    <meta property="og:description"
+        content="Modern ve profesyonel e-ticaret sitesi - En kaliteli ürünler, hızlı kargo.">
     <meta property="og:image" content="https://example.com/og-image.jpg">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -38,7 +43,8 @@
     <!-- Top Banner -->
     <div class="top-banner">
         <div class="container">
-            <p>🎉 Ücretsiz Kargo - 500 TL ve Üzeri Tüm Siparişlerde | 14 Gün İçinde Kolay İade</p>
+            <p data-i18n="header.free_shipping">🎉 Ücretsiz Kargo - 500 TL ve Üzeri Tüm Siparişlerde | 14 Gün İçinde
+                Kolay İade</p>
         </div>
     </div>
 
@@ -53,11 +59,14 @@
                     </a>
                 </div>
 
+                <!-- Auth Container (Dinamik Login/User Butonu Buraya Gelecek) -->
+                <div id="auth-container" style="margin-left: 20px;"></div>
+
                 <!-- Navigation -->
                 <nav class="nav-menu" id="navMenu">
                     <ul>
                         <li class="has-dropdown">
-                            <a href="#">Kadın</a>
+                            <a href="#" data-i18n="nav.women">Kadın</a>
                             <div class="mega-menu">
                                 <div class="mega-menu-content">
                                     <div class="mega-menu-column">
@@ -92,7 +101,7 @@
                             </div>
                         </li>
                         <li class="has-dropdown">
-                            <a href="#">Erkek</a>
+                            <a href="#" data-i18n="nav.men">Erkek</a>
                             <div class="mega-menu">
                                 <div class="mega-menu-content">
                                     <div class="mega-menu-column">
@@ -126,9 +135,9 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="products.html">Yeni Gelenler</a></li>
-                        <li><a href="products.html">İndirimler</a></li>
-                        <li><a href="#">Markalar</a></li>
+                        <li><a href="products.html" data-i18n="nav.new_arrivals">Yeni Gelenler</a></li>
+                        <li><a href="products.html" data-i18n="nav.discounts">İndirimler</a></li>
+                        <li><a href="#" data-i18n="nav.brands">Markalar</a></li>
                     </ul>
                 </nav>
 
@@ -146,7 +155,7 @@
                         <button class="icon-btn" id="themeToggle" title="Tema Değiştir">
                             <i data-feather="sun"></i>
                         </button>
-                        <a href="account.html" class="icon-btn" title="Hesabım">
+                        <a href="account.html" class="icon-btn" id="authButton" title="Hesabım">
                             <i data-feather="user"></i>
                         </a>
                         <a href="#" class="icon-btn" id="wishlistBtn" title="Favorilerim">
@@ -199,6 +208,7 @@
                         <h2 class="hero-title">2025 İlkbahar<br>Koleksiyonu</h2>
                         <p class="hero-text">Modern tasarımlar, premium kalite</p>
                         <a href="products.html" class="btn btn-primary btn-large">Şimdi Keşfet</a>
+
                     </div>
                 </div>
             </div>
@@ -477,7 +487,33 @@
     <div class="toast" id="toast"></div>
 
     <!-- Scripts -->
+    <script src="config.js"></script>
     <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="compare.js"></script>
+    <script src="i18n.js"></script>
+    <script>
+        // Initialize auth on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            initSupabase();
+            await initAuth();
+
+            // DOM'un tamamen hazır olmasını bekle
+            setTimeout(() => {
+                console.log('🕐 setTimeout tetiklendi, UI güncelleniyor...');
+
+                // UI'ı güncelle
+                if (typeof updateAuthUI === 'function') {
+                    updateAuthUI();
+                }
+
+                // Feather icons'ı başlat
+                if (typeof feather !== 'undefined') {
+                    feather.replace();
+                }
+            }, 100);
+        });
+    </script>
 </body>
 
 </html>

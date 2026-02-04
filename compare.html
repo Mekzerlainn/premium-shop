@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Karşılaştırma - Premium Shop</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css"> <!-- Button stilleri için -->
+    <style>
+        .comparison-section {
+            padding: 80px 0;
+            min-height: 60vh;
+        }
+
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 24px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: middle;
+        }
+
+        .comparison-table th {
+            text-align: left;
+            font-weight: 600;
+            color: var(--color-text-light);
+            width: 20%;
+            background: var(--color-background);
+        }
+
+        .comparison-table td {
+            width: 26%;
+            /* 3 ürün için */
+        }
+
+        .product-image-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 16px;
+            position: relative;
+        }
+
+        .product-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--color-error);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .remove-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            color: var(--color-text-lighter);
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="top-banner">
+        <div class="container">
+            <p>🎉 Ücretsiz Kargo - 500 TL ve Üzeri Tüm Siparişlerde</p>
+        </div>
+    </div>
+
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <h1>PREMIUM<span>SHOP</span></h1>
+                    </a>
+                </div>
+
+                <!-- Auth Container -->
+                <div id="auth-container" style="margin-left: 20px;"></div>
+
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="products.html">Koleksiyon</a></li>
+                        <li><a href="products.html">İndirimler</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-icons">
+                    <a href="index.html" class="icon-btn" title="Ana Sayfa">
+                        <i data-feather="home"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>Ürün Karşılaştırma</h2>
+                <div class="breadcrumb">
+                    <a href="index.html">Ana Sayfa</a>
+                    <i data-feather="chevron-right"></i>
+                    <span>Karşılaştırma</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="comparison-section">
+            <div class="container" id="comparison-container">
+                <!-- Javascript ile doldurulacak -->
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table" id="compareTable">
+                        <!-- İçerik -->
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
+    <script src="compare.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initAuth();
+            renderComparisonTable();
+            feather.replace();
+        });
+
+        function renderComparisonTable() {
+            const list = getCompareList();
+            const container = document.getElementById('comparison-container');
+
+            if (list.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i data-feather="columns" class="empty-icon"></i>
+                        <h3>Karşılaştırma listeniz boş</h3>
+                        <p>Kıyaslamak için ürünler sayfasından ürün ekleyin.</p>
+                        <a href="products.html" class="btn btn-primary" style="margin-top: 20px;">Ürünlere Git</a>
+                    </div>
+                `;
+                feather.replace();
+                return;
+            }
+
+            // Tabloyu oluştur
+            let html = `
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Özellikler</th>
+                                ${list.map(item => `
+                                    <td>
+                                        <div class="product-image-container">
+                                            <button class="remove-btn" onclick="removeFromCompare('${item.id}')">×</button>
+                                            <img src="${item.image}" alt="${item.name}">
+                                        </div>
+                                        <strong>${item.name}</strong>
+                                    </td>
+                                `).join('')}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Fiyat</th>
+                                ${list.map(item => `
+                                    <td class="price">${item.price} TL</td>
+                                `).join('')}
+                            </tr>
+                            <tr>
+                                <th>Kategori</th>
+                                ${list.map(item => `
+                                    <td>${item.category || 'Genel'}</td>
+                                `).join('')}
+                            </tr>
+                            <tr>
+                                <th>Stok Durumu</th>
+                                ${list.map(item => `
+                                    <td style="color: var(--color-success)">Stokta Var</td>
+                                `).join('')}
+                            </tr>
+                            <tr>
+                                <th>İşlemler</th>
+                                ${list.map(item => `
+                                    <td>
+                                        <button class="btn btn-small" onclick="addToCart('${item.id}')">Sepete Ekle</button>
+                                    </td>
+                                `).join('')}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            feather.replace();
+        }
+
+        // Basit Sepete Ekle (Demo)
+        function addToCart(id) {
+            alert('Ürün sepete eklendi! (Demo)');
+        }
+    </script>
+</body>
+
+</html>

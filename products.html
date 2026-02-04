@@ -14,7 +14,11 @@
 
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
     <link rel="stylesheet" href="products.css">
 </head>
 
@@ -22,7 +26,8 @@
     <!-- Top Banner -->
     <div class="top-banner">
         <div class="container">
-            <p>🎉 Ücretsiz Kargo - 500 TL ve Üzeri Tüm Siparişlerde | 14 Gün İçinde Kolay İade</p>
+            <p data-i18n="header.free_shipping">🎉 Ücretsiz Kargo - 500 TL ve Üzeri Tüm Siparişlerde | 14 Gün İçinde
+                Kolay İade</p>
         </div>
     </div>
 
@@ -36,17 +41,20 @@
                     </a>
                 </div>
 
+                <!-- Auth Container -->
+                <div id="auth-container" style="margin-left: 20px;"></div>
+
                 <nav class="nav-menu" id="navMenu">
                     <ul>
                         <li class="has-dropdown">
-                            <a href="#">Kadın</a>
+                            <a href="#" data-i18n="nav.women">Kadın</a>
                         </li>
                         <li class="has-dropdown">
-                            <a href="#">Erkek</a>
+                            <a href="#" data-i18n="nav.men">Erkek</a>
                         </li>
-                        <li><a href="products.html">Yeni Gelenler</a></li>
-                        <li><a href="products.html">İndirimler</a></li>
-                        <li><a href="#">Markalar</a></li>
+                        <li><a href="products.html" data-i18n="nav.new_arrivals">Yeni Gelenler</a></li>
+                        <li><a href="products.html" data-i18n="nav.discounts">İndirimler</a></li>
+                        <li><a href="#" data-i18n="nav.brands">Markalar</a></li>
                     </ul>
                 </nav>
 
@@ -61,7 +69,7 @@
                     </div>
 
                     <div class="header-icons">
-                        <a href="account.html" class="icon-btn" title="Hesabım">
+                        <a href="account.html" class="icon-btn" id="authButton" title="Hesabım">
                             <i data-feather="user"></i>
                         </a>
                         <a href="#" class="icon-btn" id="wishlistBtn" title="Favorilerim">
@@ -347,8 +355,19 @@
 
     <div class="toast" id="toast"></div>
 
+    <script src="config.js"></script>
     <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="compare.js"></script>
+    <script src="i18n.js"></script>
     <script src="products.js"></script>
+    <script>
+        // Initialize auth
+        document.addEventListener('DOMContentLoaded', () => {
+            initSupabase();
+            initAuth();
+        });
+    </script>
 </body>
 
 </html>

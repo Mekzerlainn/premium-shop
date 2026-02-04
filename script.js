@@ -26,12 +26,27 @@ const sampleProducts = [
         price: 1299,
         oldPrice: 1899,
         image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&h=500&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1559551409-dadc959f76b8?w=800&h=800&fit=crop'
+        ],
+        description: 'Premium kalite gerçek deri ceket. El işçiliği ile özenle üretilmiştir. Su geçirmez astar ve YKK fermuar ile donatılmıştır. Zamansız tasarımı ile her kombinle uyum sağlar.',
         rating: 4.8,
         reviews: 124,
         badge: 'sale',
         category: 'Kadın',
         stock: 45,
-        status: 'active'
+        status: 'active',
+        variants: {
+            sizes: ['XS', 'S', 'M', 'L', 'XL'],
+            colors: [
+                { name: 'Siyah', hex: '#000000' },
+                { name: 'Kahverengi', hex: '#8B4513' },
+                { name: 'Bordo', hex: '#800020' }
+            ]
+        },
+        features: ['Gerçek Deri', 'El İşçiliği', 'Su Geçirmez Astar', 'YKK Fermuar']
     },
     {
         id: 2,
@@ -39,12 +54,27 @@ const sampleProducts = [
         price: 299,
         oldPrice: null,
         image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&h=500&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&h=800&fit=crop'
+        ],
+        description: 'Yüksek kalite pamuklu klasik beyaz gömlek. Slim fit kesim ile modern bir görünüm sunar. Ofis ve özel günler için mükemmel tercih.',
         rating: 4.5,
         reviews: 89,
         badge: 'new',
         category: 'Erkek',
         stock: 120,
-        status: 'active'
+        status: 'active',
+        variants: {
+            sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+            colors: [
+                { name: 'Beyaz', hex: '#FFFFFF' },
+                { name: 'Açık Mavi', hex: '#ADD8E6' },
+                { name: 'Pembe', hex: '#FFB6C1' }
+            ]
+        },
+        features: ['%100 Pamuk', 'Slim Fit', 'Kolay Ütü', 'Nefes Alabilir']
     },
     {
         id: 3,
@@ -52,12 +82,27 @@ const sampleProducts = [
         price: 899,
         oldPrice: 1299,
         image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&h=500&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&h=800&fit=crop'
+        ],
+        description: 'Hafif ve konforlu spor ayakkabı. Günlük kullanım ve koşu için idealdir. Ortopedik taban ve hava yastıklı yapısı ile ayaklarınızı korur.',
         rating: 4.9,
         reviews: 256,
         badge: 'sale',
         category: 'Ayakkabı',
         stock: 8,
-        status: 'active'
+        status: 'active',
+        variants: {
+            sizes: ['38', '39', '40', '41', '42', '43', '44'],
+            colors: [
+                { name: 'Kırmızı', hex: '#FF0000' },
+                { name: 'Siyah', hex: '#000000' },
+                { name: 'Beyaz', hex: '#FFFFFF' }
+            ]
+        },
+        features: ['Ortopedik Taban', 'Hava Yastıklı', 'Hafif Yapı', 'Nefes Alabilir']
     },
     {
         id: 4,
@@ -65,12 +110,27 @@ const sampleProducts = [
         price: 449,
         oldPrice: null,
         image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&h=500&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1475178626620-a4d074967452?w=800&h=800&fit=crop'
+        ],
+        description: 'Yüksek kalite denim pantolon. Dayanıklı kumaşı ve rahat kesimi ile günlük kullanım için mükemmel. Regular fit kesim.',
         rating: 4.6,
         reviews: 178,
         badge: null,
         category: 'Erkek',
         stock: 67,
-        status: 'active'
+        status: 'active',
+        variants: {
+            sizes: ['28', '30', '32', '34', '36', '38'],
+            colors: [
+                { name: 'Koyu Mavi', hex: '#00008B' },
+                { name: 'Açık Mavi', hex: '#87CEEB' },
+                { name: 'Siyah', hex: '#000000' }
+            ]
+        },
+        features: ['Dayanıklı Denim', 'Regular Fit', 'Esnek Kumaş', '5 Cepli']
     },
     {
         id: 5,
@@ -78,12 +138,27 @@ const sampleProducts = [
         price: 799,
         oldPrice: 1199,
         image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&h=500&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=800&fit=crop'
+        ],
+        description: 'Zarif ve şık gece elbisesi. Özel davetler ve kutlamalar için ideal. Premium kumaş ve özenli dikim ile üretilmiştir.',
         rating: 4.7,
         reviews: 145,
         badge: 'sale',
         category: 'Kadın',
         stock: 15,
-        status: 'active'
+        status: 'active',
+        variants: {
+            sizes: ['XS', 'S', 'M', 'L'],
+            colors: [
+                { name: 'Siyah', hex: '#000000' },
+                { name: 'Kırmızı', hex: '#FF0000' },
+                { name: 'Lacivert', hex: '#000080' }
+            ]
+        },
+        features: ['Premium Kumaş', 'Zarif Kesim', 'Astarlı', 'Gizli Fermuar']
     },
     {
         id: 6,
@@ -91,12 +166,27 @@ const sampleProducts = [
         price: 649,
         oldPrice: null,
         image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500&h=500&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=800&h=800&fit=crop'
+        ],
+        description: 'El yapımı gerçek deri çanta. Geniş iç hacmi ve çoklu cepleri ile pratik kullanım sunar. Ayarlanabilir omuz askısı.',
         rating: 4.8,
         reviews: 203,
         badge: 'new',
         category: 'Aksesuar',
         stock: 34,
-        status: 'active'
+        status: 'active',
+        variants: {
+            sizes: ['Standart'],
+            colors: [
+                { name: 'Siyah', hex: '#000000' },
+                { name: 'Kahverengi', hex: '#8B4513' },
+                { name: 'Bej', hex: '#F5F5DC' }
+            ]
+        },
+        features: ['Gerçek Deri', 'El Yapımı', 'Ayarlanabilir Askı', 'Çoklu Cep']
     },
     {
         id: 7,
@@ -104,12 +194,27 @@ const sampleProducts = [
         price: 1599,
         oldPrice: 2299,
         image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=500&h=500&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1544923246-77307dd628b5?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=800&h=800&fit=crop'
+        ],
+        description: 'Sıcak tutan kışlık mont. Su ve rüzgar geçirmez dış yüzey, polar astar. Kapüşonlu ve çoklu cepli tasarım.',
         rating: 4.9,
         reviews: 312,
         badge: 'sale',
         category: 'Kadın',
         stock: 23,
-        status: 'active'
+        status: 'active',
+        variants: {
+            sizes: ['XS', 'S', 'M', 'L', 'XL'],
+            colors: [
+                { name: 'Siyah', hex: '#000000' },
+                { name: 'Haki', hex: '#808000' },
+                { name: 'Lacivert', hex: '#000080' }
+            ]
+        },
+        features: ['Su Geçirmez', 'Rüzgar Geçirmez', 'Polar Astar', 'Kapüşonlu']
     },
     {
         id: 8,
@@ -117,22 +222,43 @@ const sampleProducts = [
         price: 349,
         oldPrice: null,
         image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&h=500&fit=crop',
+        images: [
+            'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?w=800&h=800&fit=crop',
+            'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&h=800&fit=crop'
+        ],
+        description: 'Konforlu oversize sweatshirt. Yumuşak pamuklu kumaş ve rahat kesim. Günlük kullanım ve spor için ideal.',
         rating: 4.4,
         reviews: 98,
         badge: null,
         category: 'Erkek',
         stock: 89,
-        status: 'active'
+        status: 'active',
+        variants: {
+            sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+            colors: [
+                { name: 'Siyah', hex: '#000000' },
+                { name: 'Gri', hex: '#808080' },
+                { name: 'Beyaz', hex: '#FFFFFF' }
+            ]
+        },
+        features: ['%100 Pamuk', 'Oversize Kesim', 'Yumuşak Kumaş', 'Kanguru Cep']
     }
 ];
 
 // Load products from LocalStorage or initialize with sample data
+// Version check to update old data structure
+const DATA_VERSION = '2.0'; // Increment when data structure changes
+const storedVersion = localStorage.getItem('dataVersion');
 const storedProducts = localStorage.getItem('products');
-if (storedProducts) {
-    state.products = JSON.parse(storedProducts);
-} else {
+
+if (storedVersion !== DATA_VERSION || !storedProducts) {
+    // Reset to new sample data with variants
     state.products = sampleProducts;
     localStorage.setItem('products', JSON.stringify(sampleProducts));
+    localStorage.setItem('dataVersion', DATA_VERSION);
+} else {
+    state.products = JSON.parse(storedProducts);
 }
 
 // === INITIALIZATION ===
@@ -378,20 +504,30 @@ function createProductCard(product) {
 
     return `
         <div class="product-card">
-            <div class="product-image">
-                <img src="${product.image}" alt="${safeName}" loading="lazy">
-                ${badgeHTML}
-                <div class="product-actions">
-                    <button class="product-action-btn wishlist-btn" data-id="${product.id}" title="Favorilere Ekle">
-                        <i data-feather="heart"></i>
-                    </button>
-                    <button class="product-action-btn" title="Hızlı Görünüm">
-                        <i data-feather="eye"></i>
-                    </button>
+            <a href="product-detail.html?id=${product.id}" class="product-image-link">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${safeName}" loading="lazy">
+                    ${badgeHTML}
+                    <div class="product-actions">
+                        <button class="product-action-btn wishlist-btn" data-id="${product.id}" title="Favorilere Ekle">
+                            <i data-feather="heart"></i>
+                        </button>
+                        <button class="product-action-btn" onclick="addToCompareById(${product.id}); return false;" title="Karşılaştır">
+                             <i data-feather="columns"></i>
+                        </button>
+                        <a href="product-detail.html?id=${product.id}" class="product-action-btn" title="Hızlı Görünüm">
+                            <i data-feather="eye"></i>
+                        </a>
+                    </div>
+                    <div class="compare-badge-container">
+                         <!-- Dinamik olarak gerekirse buraya bir şey eklenebilir -->
+                    </div>
                 </div>
-            </div>
+            </a>
             <div class="product-info">
-                <h3 class="product-title">${safeName}</h3>
+                <a href="product-detail.html?id=${product.id}">
+                    <h3 class="product-title">${safeName}</h3>
+                </a>
                 <div class="product-rating">
                     ${stars}
                     <span>(${product.reviews})</span>

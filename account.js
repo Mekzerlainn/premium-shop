@@ -68,13 +68,14 @@ function renderAllOrders() {
                 </div>
                 <div class="order-status ${getStatusClass(order.status)}">${getStatusText(order.status)}</div>
             </div>
+            ${renderOrderTimeline(order.status)}
             <div class="order-items">
                 ${order.cartItems.map(item => `
                     <div class="order-product">
-                        <img src="${item.image}" alt="${item.name}">
+                        <img src="${item.image}" alt="${escapeHtml(item.name)}">
                         <div>
-                            <h4>${item.name}</h4>
-                            <p>Adet: ${item.quantity}</p>
+                            <h4>${escapeHtml(item.name)}</h4>
+                            <p>Adet: ${item.quantity}${item.size ? ` | Beden: ${item.size}` : ''}${item.color ? ` | Renk: ${item.color}` : ''}</p>
                         </div>
                         <span>${formatPrice(item.price)}</span>
                     </div>
@@ -83,11 +84,91 @@ function renderAllOrders() {
             <div class="order-footer">
                 <div class="order-total">Toplam: <strong>${formatPrice(order.amount)}</strong></div>
                 <div class="order-actions">
-                    <button class="btn btn-secondary">Detayları Gör</button>
+                    <button class="btn btn-secondary" onclick="viewOrderDetails('${order.id}')">Detayları Gör</button>
                 </div>
             </div>
         </div>
     `).join('');
+}
+
+// Order Timeline Component
+function renderOrderTimeline(status) {
+    const statuses = ['pending', 'processing', 'shipping', 'completed'];
+    const statusLabels = {
+        'pending': 'Sipariş Alındı',
+        'processing': 'Hazırlanıyor',
+        'shipping': 'Kargoda',
+        'completed': 'Teslim Edildi'
+    };
+    const statusIcons = {
+        'pending': 'check-circle',
+        'processing': 'package',
+        'shipping': 'truck',
+        'completed': 'home'
+    };
+
+    // Handle cancelled status differently
+    if (status === 'cancelled') {
+        return `
+            <div class="order-timeline cancelled">
+                <div class="timeline-step cancelled">
+                    <div class="timeline-icon">
+                        <i data-feather="x-circle"></i>
+                    </div>
+                    <span>Sipariş İptal Edildi</span>
+                </div>
+            </div>
+        `;
+    }
+
+    const currentIndex = statuses.indexOf(status);
+
+    return `
+        <div class="order-timeline">
+            ${statuses.map((s, i) => `
+                <div class="timeline-step ${i <= currentIndex ? 'active' : ''} ${i === currentIndex ? 'current' : ''}">
+                    <div class="timeline-icon">
+                        <i data-feather="${statusIcons[s]}"></i>
+                    </div>
+                    <span>${statusLabels[s]}</span>
+                    ${i < statuses.length - 1 ? '<div class="timeline-line"></div>' : ''}
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+// View order details
+function viewOrderDetails(orderId) {
+    const order = state.orders.find(o => o.id === orderId);
+    if (!order) return;
+
+    // Create modal content
+    const modalContent = `
+        <div class="order-detail-modal">
+            <h3>Sipariş Detayları #${order.id}</h3>
+            <div class="order-detail-section">
+                <h4>Sipariş Bilgileri</h4>
+                <p><strong>Tarih:</strong> ${order.date}</p>
+                <p><strong>Durum:</strong> ${getStatusText(order.status)}</p>
+                <p><strong>Toplam:</strong> ${formatPrice(order.amount)}</p>
+            </div>
+            <div class="order-detail-section">
+                <h4>Ürünler</h4>
+                ${order.cartItems.map(item => `
+                    <div class="order-detail-item">
+                        <img src="${item.image}" alt="${escapeHtml(item.name)}">
+                        <div>
+                            <p><strong>${escapeHtml(item.name)}</strong></p>
+                            <p>Adet: ${item.quantity} × ${formatPrice(item.price)}</p>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+
+    showToast(`Sipariş #${orderId} detayları görüntüleniyor...`);
 }
 
 function getStatusClass(status) {

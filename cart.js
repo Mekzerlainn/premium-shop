@@ -32,33 +32,87 @@ function renderCartItems() {
     cartLayout.style.display = 'grid';
     emptyCart.style.display = 'none';
 
-    cartItemsContainer.innerHTML = state.cart.map(item => `
-        <div class="cart-item">
-            <div class="cart-item-image">
-                <img src="${item.image}" alt="${item.name}">
-            </div>
-            <div class="cart-item-info">
-                <h3 class="cart-item-title">${item.name}</h3>
-                <div class="cart-item-details">
-                    <span>Beden: M</span>
-                    <span>Renk: Siyah</span>
+    cartItemsContainer.innerHTML = state.cart.map((item, index) => {
+        // Build variant info string
+        const variantInfo = [];
+        if (item.size) variantInfo.push(`Beden: ${item.size}`);
+        if (item.color) variantInfo.push(`Renk: ${item.color}`);
+        const variantHTML = variantInfo.length > 0
+            ? `<div class="cart-item-details">${variantInfo.map(v => `<span>${v}</span>`).join('')}</div>`
+            : '';
+
+        // Create unique item key for items with variants
+        const itemKey = `${item.id}-${item.size || ''}-${item.color || ''}`;
+
+        return `
+            <div class="cart-item" data-item-key="${itemKey}">
+                <div class="cart-item-image">
+                    <a href="product-detail.html?id=${item.id}">
+                        <img src="${item.image}" alt="${escapeHtml(item.name)}">
+                    </a>
                 </div>
-                <div class="cart-item-price">${formatPrice(item.price)}</div>
-            </div>
-            <div class="cart-item-actions">
-                <button class="remove-item" onclick="removeFromCartPage(${item.id})">
-                    <i data-feather="trash-2"></i>
-                </button>
-                <div class="quantity-selector">
-                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
-                    <span class="quantity-value">${item.quantity}</span>
-                    <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                <div class="cart-item-info">
+                    <a href="product-detail.html?id=${item.id}">
+                        <h3 class="cart-item-title">${escapeHtml(item.name)}</h3>
+                    </a>
+                    ${variantHTML}
+                    <div class="cart-item-price">${formatPrice(item.price)}</div>
+                </div>
+                <div class="cart-item-actions">
+                    <button class="remove-item" onclick="removeFromCartWithVariant(${item.id}, '${item.size || ''}', '${item.color || ''}')">
+                        <i data-feather="trash-2"></i>
+                    </button>
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="updateQuantityWithVariant(${item.id}, '${item.size || ''}', '${item.color || ''}', ${item.quantity - 1})">-</button>
+                        <span class="quantity-value">${item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateQuantityWithVariant(${item.id}, '${item.size || ''}', '${item.color || ''}', ${item.quantity + 1})">+</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 
     feather.replace();
+}
+
+// Remove item with variant support
+function removeFromCartWithVariant(productId, size, color) {
+    const index = state.cart.findIndex(item =>
+        item.id === productId &&
+        (item.size || '') === size &&
+        (item.color || '') === color
+    );
+
+    if (index > -1) {
+        state.cart.splice(index, 1);
+        saveCart();
+        updateCartCount();
+        renderCartItems();
+        updateCartSummary();
+        showToast('Ürün sepetten kaldırıldı');
+    }
+}
+
+// Update quantity with variant support
+function updateQuantityWithVariant(productId, size, color, newQuantity) {
+    if (newQuantity < 1) {
+        removeFromCartWithVariant(productId, size, color);
+        return;
+    }
+
+    const item = state.cart.find(item =>
+        item.id === productId &&
+        (item.size || '') === size &&
+        (item.color || '') === color
+    );
+
+    if (item) {
+        item.quantity = Math.min(10, newQuantity);
+        saveCart();
+        updateCartCount();
+        renderCartItems();
+        updateCartSummary();
+    }
 }
 
 function updateCartSummary() {
@@ -117,3 +171,5 @@ function initCoupon() {
 // Make functions globally available
 window.removeFromCartPage = removeFromCartPage;
 window.updateQuantity = updateQuantity;
+window.removeFromCartWithVariant = removeFromCartWithVariant;
+window.updateQuantityWithVariant = updateQuantityWithVariant;

@@ -13,7 +13,11 @@
 
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
     <link rel="stylesheet" href="account.css">
 </head>
 
@@ -110,7 +114,7 @@
                             <i data-feather="settings"></i>
                             <span>Hesap Bilgileri</span>
                         </a>
-                        <a href="index.html" class="menu-item logout">
+                        <a href="#" class="menu-item logout" id="logoutBtn">
                             <i data-feather="log-out"></i>
                             <span>Çıkış Yap</span>
                         </a>
@@ -336,8 +340,84 @@
 
     <div class="toast" id="toast"></div>
 
+    <script src="config.js"></script>
     <script src="script.js"></script>
+    <script src="auth.js"></script>
     <script src="account.js"></script>
+    <script>
+        // Initialize and protect page
+        document.addEventListener('DOMContentLoaded', async () => {
+            initSupabase();
+            await initAuth();
+
+            // Wait for auth state to load
+            setTimeout(() => {
+                if (!isAuthenticated()) {
+                    window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                    return;
+                }
+
+                // Update user info display
+                const user = getCurrentUser();
+                if (user) {
+                    const userName = user.user_metadata?.full_name || user.email.split('@')[0];
+
+                    // Update sidebar user info
+                    const userInfoName = document.querySelector('.user-info h3');
+                    const userInfoEmail = document.querySelector('.user-info p');
+                    if (userInfoName) userInfoName.textContent = userName;
+                    if (userInfoEmail) userInfoEmail.textContent = user.email;
+
+                    // Update dashboard greeting
+                    const dashboardGreeting = document.querySelector('#dashboard h2');
+                    if (dashboardGreeting) {
+                        dashboardGreeting.textContent = `Hoş Geldiniz, ${userName.split(' ')[0]}!`;
+                    }
+
+                    // Update profile form
+                    const profileNameParts = userName.split(' ');
+                    const firstNameInput = document.querySelector('.profile-form input[type="text"]');
+                    const lastNameInput = document.querySelectorAll('.profile-form input[type="text"]')[1];
+                    const emailInput = document.querySelector('.profile-form input[type="email"]');
+
+                    if (firstNameInput) firstNameInput.value = profileNameParts[0] || '';
+                    if (lastNameInput) lastNameInput.value = profileNameParts.slice(1).join(' ') || '';
+                    if (emailInput) emailInput.value = user.email || '';
+                }
+            }, 500);
+
+            // Logout button handler
+            document.getElementById('logoutBtn')?.addEventListener('click', async (e) => {
+                e.preventDefault();
+                await handleLogout();
+            });
+
+            // Password change form handler
+            document.querySelector('.password-form')?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const newPassword = e.target.querySelectorAll('input[type="password"]')[1].value;
+                const confirmPassword = e.target.querySelectorAll('input[type="password"]')[2].value;
+
+                if (newPassword !== confirmPassword) {
+                    showToast('Şifreler eşleşmiyor!', 'error');
+                    return;
+                }
+
+                if (newPassword.length < 6) {
+                    showToast('Şifre en az 6 karakter olmalı!', 'error');
+                    return;
+                }
+
+                const result = await updatePassword(newPassword);
+                if (result.error) {
+                    showToast(getErrorMessage(result.error), 'error');
+                } else {
+                    showToast('Şifreniz başarıyla güncellendi!');
+                    e.target.reset();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

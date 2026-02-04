@@ -13,7 +13,11 @@
 
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
     <link rel="stylesheet" href="cart.css">
 </head>
 
@@ -41,7 +45,7 @@
                     <a href="index.html" class="icon-btn">
                         <i data-feather="home"></i>
                     </a>
-                    <a href="account.html" class="icon-btn">
+                    <a href="account.html" class="icon-btn" id="authButton">
                         <i data-feather="user"></i>
                     </a>
                 </div>
@@ -172,8 +176,17 @@
 
     <div class="toast" id="toast"></div>
 
+    <script src="config.js"></script>
     <script src="script.js"></script>
+    <script src="auth.js"></script>
     <script src="cart.js"></script>
+    <script>
+        // Initialize auth
+        document.addEventListener('DOMContentLoaded', () => {
+            initSupabase();
+            initAuth();
+        });
+    </script>
 </body>
 
 </html>

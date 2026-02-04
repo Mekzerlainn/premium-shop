@@ -1,0 +1,44 @@
+{
+    "nav": {
+        "home": "Home",
+        "collection": "Collection",
+        "women": "Women",
+        "men": "Men",
+        "new_arrivals": "New Arrivals",
+        "discounts": "Discounts",
+        "brands": "Brands",
+        "about": "About Us",
+        "contact": "Contact"
+    },
+    "header": {
+        "search_placeholder": "Search products...",
+        "login": "Login",
+        "account": "My Account",
+        "cart": "My Cart",
+        "compare": "Compare",
+        "logout": "Logout",
+        "orders": "My Orders",
+        "favorites": "My Favorites",
+        "free_shipping": "🎉 Free Shipping on all orders over 500 TL"
+    },
+    "hero": {
+        "title": "New Season",
+        "subtitle": "Discover the latest trends",
+        "btn_shop": "Shop Now"
+    },
+    "common": {
+        "add_to_cart": "Add to Cart",
+        "view_details": "View Details",
+        "sale": "SALE",
+        "new": "NEW",
+        "price": "Price",
+        "out_of_stock": "Out of Stock"
+    },
+    "footer": {
+        "about_text": "The address of modern and quality shopping.",
+        "corporate": "Corporate",
+        "customer_service": "Customer Service",
+        "contact_us": "Contact Us",
+        "rights": "All rights reserved."
+    }
+}
