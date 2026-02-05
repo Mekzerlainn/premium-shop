@@ -91,8 +91,11 @@ function initLangToggle() {
 
         // Tema butonunun önüne ekle
         const themeBtn = document.getElementById('themeToggle');
-        if (themeBtn) {
+        if (themeBtn && themeBtn.parentNode === headerActions) {
             headerActions.insertBefore(langDiv, themeBtn);
+        } else if (themeBtn && themeBtn.parentNode) {
+            // Eğer themeBtn başka bir yerdeyse, onun parent'ına ekle
+            themeBtn.parentNode.insertBefore(langDiv, themeBtn);
         } else {
             headerActions.prepend(langDiv);
         }

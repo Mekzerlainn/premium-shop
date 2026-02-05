@@ -510,7 +510,6 @@ body.dark-mode .auth-card {
     color: var(--color-accent);
 }
 
-/* Responsive */
 @media (max-width: 480px) {
     .auth-card {
         padding: var(--spacing-lg);
@@ -528,5 +527,207 @@ body.dark-mode .auth-card {
 
     .user-name {
         display: none;
+    }
+}
+
+/* ==========================================
+   AUTH MODAL STYLES
+   ========================================== */
+
+/* Modal Overlay */
+.auth-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 3000;
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 5vh var(--spacing-sm);
+    overflow-y: auto;
+}
+
+.auth-modal-overlay.active {
+    display: flex;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal Container */
+.auth-modal {
+    display: none;
+    width: 100%;
+    max-width: 440px;
+}
+
+.auth-modal.active {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Card */
+.auth-modal-card {
+    background: var(--color-bg);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    padding: var(--spacing-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+body.dark-mode .auth-modal-card {
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-light);
+}
+
+.auth-modal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent), #764ba2);
+}
+
+/* Modal Close Button */
+.modal-close-btn {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-bg-light);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    transition: all var(--transition-base);
+    z-index: 10;
+}
+
+.modal-close-btn:hover {
+    background: var(--color-border);
+    color: var(--color-text);
+    transform: rotate(90deg);
+}
+
+body.dark-mode .modal-close-btn {
+    background: var(--color-bg);
+}
+
+body.dark-mode .modal-close-btn:hover {
+    background: var(--color-border);
+}
+
+/* Header Auth Button */
+.btn-header-auth {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 8px 16px;
+    background: linear-gradient(135deg, var(--color-accent), #764ba2);
+    color: white;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+}
+
+.btn-header-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-header-auth i {
+    width: 16px;
+    height: 16px;
+}
+
+/* Header Register Link */
+.header-register-link {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin-left: var(--spacing-xs);
+}
+
+.header-register-link a {
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+.header-register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Auth Container Styles */
+#auth-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+/* Mobile Responsive Modal */
+@media (max-width: 480px) {
+    .auth-modal-overlay {
+        padding: var(--spacing-sm);
+        align-items: flex-start;
+    }
+
+    .auth-modal-card {
+        padding: var(--spacing-lg);
+    }
+
+    .btn-header-auth span {
+        display: none;
+    }
+
+    .btn-header-auth {
+        padding: 8px;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        justify-content: center;
+    }
+
+    .header-register-link {
+        display: none;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .auth-modal {
+        max-width: 100%;
     }
 }

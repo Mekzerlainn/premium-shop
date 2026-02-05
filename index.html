@@ -477,14 +477,169 @@
             <span>Sepet</span>
             <span class="badge" id="mobileCartCount">0</span>
         </a>
-        <a href="account.html">
+        <a href="#" id="mobileAccountBtn" onclick="handleMobileAccountClick(); return false;">
             <i data-feather="user"></i>
-            <span>Hesabım</span>
+            <span id="mobileAccountText">Hesabım</span>
         </a>
     </div>
 
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
+
+    <!-- ==========================================
+         AUTH MODALS - Login & Register
+         ========================================== -->
+    <div class="auth-modal-overlay" id="authModalOverlay">
+
+        <!-- Login Modal -->
+        <div class="auth-modal" id="loginModal">
+            <div class="auth-modal-card">
+                <button class="modal-close-btn" onclick="closeAuthModal()" title="Kapat">
+                    <i data-feather="x"></i>
+                </button>
+
+                <div class="auth-header">
+                    <div class="auth-logo">Premium<span>Shop</span></div>
+                    <h2>Giriş Yap</h2>
+                    <p>Hesabınıza giriş yaparak alışverişe devam edin</p>
+                </div>
+
+                <div id="loginModalAlert" class="auth-alert" style="display: none;"></div>
+
+                <form id="loginModalForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">E-posta Adresi</label>
+                        <input type="email" id="loginEmail" name="email" placeholder="ornek@email.com" required
+                            autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Şifre</label>
+                        <div class="password-field">
+                            <input type="password" id="loginPassword" name="password" placeholder="••••••••" required
+                                autocomplete="current-password" minlength="6">
+                            <button type="button" class="password-toggle"
+                                onclick="togglePasswordVisibility('loginPassword', this)">
+                                <i data-feather="eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="loginRememberMe" name="rememberMe">
+                            <span>Beni hatırla</span>
+                        </label>
+                        <a href="forgot-password.html" class="forgot-password">Şifremi unuttum</a>
+                    </div>
+
+                    <button type="submit" class="auth-btn" id="loginModalBtn">
+                        <span>Giriş Yap</span>
+                    </button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>veya</span>
+                </div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn google" id="googleLoginModal">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                                fill="#4285F4" />
+                            <path
+                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                fill="#34A853" />
+                            <path
+                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                fill="#FBBC05" />
+                            <path
+                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                fill="#EA4335" />
+                        </svg>
+                        <span>Google ile devam et</span>
+                    </button>
+                </div>
+
+                <div class="auth-footer">
+                    <p>Hesabınız yok mu? <a href="#" onclick="switchToRegister(); return false;">Ücretsiz kayıt olun</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Modal -->
+        <div class="auth-modal" id="registerModal">
+            <div class="auth-modal-card">
+                <button class="modal-close-btn" onclick="closeAuthModal()" title="Kapat">
+                    <i data-feather="x"></i>
+                </button>
+
+                <div class="auth-header">
+                    <div class="auth-logo">Premium<span>Shop</span></div>
+                    <h2>Hesap Oluştur</h2>
+                    <p>Hemen kayıt olun ve alışverişe başlayın</p>
+                </div>
+
+                <div id="registerModalAlert" class="auth-alert" style="display: none;"></div>
+
+                <form id="registerModalForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="registerName">Ad Soyad</label>
+                        <input type="text" id="registerName" name="fullName" placeholder="Adınız Soyadınız" required
+                            autocomplete="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail">E-posta Adresi</label>
+                        <input type="email" id="registerEmail" name="email" placeholder="ornek@email.com" required
+                            autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPassword">Şifre</label>
+                        <div class="password-field">
+                            <input type="password" id="registerPassword" name="password" placeholder="En az 6 karakter"
+                                required autocomplete="new-password" minlength="6">
+                            <button type="button" class="password-toggle"
+                                onclick="togglePasswordVisibility('registerPassword', this)">
+                                <i data-feather="eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPasswordConfirm">Şifre Tekrar</label>
+                        <div class="password-field">
+                            <input type="password" id="registerPasswordConfirm" name="confirmPassword"
+                                placeholder="Şifrenizi tekrar girin" required autocomplete="new-password" minlength="6">
+                            <button type="button" class="password-toggle"
+                                onclick="togglePasswordVisibility('registerPasswordConfirm', this)">
+                                <i data-feather="eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="registerTerms" name="terms" required>
+                        <label for="registerTerms">
+                            <a href="terms.html" target="_blank">Kullanım Şartları</a>'nı ve
+                            <a href="privacy.html" target="_blank">Gizlilik Politikası</a>'nı kabul ediyorum.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="auth-btn" id="registerModalBtn">
+                        <span>Kayıt Ol</span>
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Zaten hesabınız var mı? <a href="#" onclick="switchToLogin(); return false;">Giriş yapın</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="config.js"></script>

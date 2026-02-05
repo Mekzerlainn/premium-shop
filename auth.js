@@ -308,12 +308,15 @@ function updateAuthUI() {
                 </a>
             `;
         } else {
-            // GİRİŞ YAPMAMIŞ KULLANICI
+            // GİRİŞ YAPMAMIŞ KULLANICI - Modal açan buton
             authContainer.innerHTML = `
-                <a href="login.html" class="btn-header-auth">\r
-                    <i data-feather="log-in"></i>\r
-                    <span data-i18n="header.login">Giriş Yap</span>\r
-                </a>\r
+                <button type="button" class="btn-header-auth" onclick="openLoginModal()" title="Giriş Yap">
+                    <i data-feather="log-in"></i>
+                    <span data-i18n="header.login">Giriş Yap</span>
+                </button>
+                <span class="header-register-link">
+                    veya <a href="#" onclick="openRegisterModal(); return false;">Kayıt Ol</a>
+                </span>
             `;
         }
     }
@@ -387,14 +390,30 @@ function updateAuthUI() {
             if (userMenu) userMenu.remove();
 
             if (!authBtn) {
-                // Buton yoksa basit ikonlu buton oluştur
+                // Buton yoksa modal açan ikonlu buton oluştur
                 const authBtnHTML = `
-                        < a href = "login.html" class="icon-btn" id = "authButton" title = "Giriş Yap" >
-                            <i data-feather="user"></i>
-                    </a >
-                        `;
+                    <button type="button" class="icon-btn" id="authButton" title="Giriş Yap" onclick="openLoginModal()">
+                        <i data-feather="user"></i>
+                    </button>
+                `;
                 headerIcons.insertAdjacentHTML('afterbegin', authBtnHTML);
             }
+        }
+    }
+
+    // --- 3. MOBİL BOTTOM NAV GÜNCELLEMESİ ---
+    const mobileAccountBtn = document.getElementById('mobileAccountBtn');
+    const mobileAccountText = document.getElementById('mobileAccountText');
+
+    if (mobileAccountBtn && mobileAccountText) {
+        if (user) {
+            // Giriş yapmış - account sayfasına git
+            mobileAccountText.textContent = 'Hesabım';
+            mobileAccountBtn.setAttribute('data-logged-in', 'true');
+        } else {
+            // Giriş yapmamış - modal aç
+            mobileAccountText.textContent = 'Giriş';
+            mobileAccountBtn.setAttribute('data-logged-in', 'false');
         }
     }
 
@@ -523,3 +542,400 @@ window.redirectIfAuthenticated = redirectIfAuthenticated;
 window.updateAuthUI = updateAuthUI;
 window.handleLogout = handleLogout;
 window.getErrorMessage = getErrorMessage;
+
+// ==========================================
+// MODAL FONKSİYONLARI
+// ==========================================
+
+/**
+ * Login modalını aç
+ */
+function openLoginModal() {
+    const overlay = document.getElementById('authModalOverlay');
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+
+    if (overlay && loginModal) {
+        overlay.classList.add('active');
+        loginModal.classList.add('active');
+        registerModal?.classList.remove('active');
+        document.body.style.overflow = 'hidden';
+
+        // İkonları yenile
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
+
+        // İlk input'a focus
+        setTimeout(() => {
+            document.getElementById('loginEmail')?.focus();
+        }, 100);
+    }
+}
+
+/**
+ * Register modalını aç
+ */
+function openRegisterModal() {
+    const overlay = document.getElementById('authModalOverlay');
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+
+    if (overlay && registerModal) {
+        overlay.classList.add('active');
+        registerModal.classList.add('active');
+        loginModal?.classList.remove('active');
+        document.body.style.overflow = 'hidden';
+
+        // İkonları yenile
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
+
+        // İlk input'a focus
+        setTimeout(() => {
+            document.getElementById('registerName')?.focus();
+        }, 100);
+    }
+}
+
+/**
+ * Auth modallarını kapat
+ */
+function closeAuthModal() {
+    const overlay = document.getElementById('authModalOverlay');
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+
+    overlay?.classList.remove('active');
+    loginModal?.classList.remove('active');
+    registerModal?.classList.remove('active');
+    document.body.style.overflow = '';
+
+    // Formları temizle
+    document.getElementById('loginModalForm')?.reset();
+    document.getElementById('registerModalForm')?.reset();
+
+    // Alert'leri gizle
+    const loginAlert = document.getElementById('loginModalAlert');
+    const registerAlert = document.getElementById('registerModalAlert');
+    if (loginAlert) loginAlert.style.display = 'none';
+    if (registerAlert) registerAlert.style.display = 'none';
+}
+
+/**
+ * Login'den Register'a geç
+ */
+function switchToRegister() {
+    document.getElementById('loginModal')?.classList.remove('active');
+    document.getElementById('registerModal')?.classList.add('active');
+
+    // İkonları yenile
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+
+    setTimeout(() => {
+        document.getElementById('registerName')?.focus();
+    }, 100);
+}
+
+/**
+ * Register'dan Login'e geç
+ */
+function switchToLogin() {
+    document.getElementById('registerModal')?.classList.remove('active');
+    document.getElementById('loginModal')?.classList.add('active');
+
+    // İkonları yenile
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+
+    setTimeout(() => {
+        document.getElementById('loginEmail')?.focus();
+    }, 100);
+}
+
+/**
+ * Şifre görünürlüğünü toggle et
+ */
+function togglePasswordVisibility(inputId, button) {
+    const input = document.getElementById(inputId);
+    // const icon = button.querySelector('i'); // Hata kaynağı: SVG dönüşümü sonrası 'i' bulunamaz
+
+    let newIcon;
+    if (input.type === 'password') {
+        input.type = 'text';
+        newIcon = 'eye-off';
+    } else {
+        input.type = 'password';
+        newIcon = 'eye';
+    }
+
+    // Buton içeriğini tamamen yenile (En güvenli yöntem)
+    button.innerHTML = `<i data-feather="${newIcon}"></i>`;
+
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+}
+
+/**
+ * Modal içi alert göster
+ */
+function showModalAlert(alertId, type, message) {
+    const alertEl = document.getElementById(alertId);
+    if (!alertEl) return;
+
+    const icon = type === 'error' ? 'alert-circle' : type === 'success' ? 'check-circle' : 'info';
+
+    alertEl.className = `auth-alert ${type}`;
+    alertEl.innerHTML = `
+        <i data-feather="${icon}"></i>
+        <span>${message}</span>
+    `;
+    alertEl.style.display = 'flex';
+
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
+}
+
+// ==========================================
+// MODAL FORM İŞLEYİCİLERİ
+// ==========================================
+
+// DOM hazır olduğunda form event listener'ları ekle
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Login Modal Form Submit
+    const loginForm = document.getElementById('loginModalForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const loginBtn = document.getElementById('loginModalBtn');
+
+            // Buton loading state
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<div class="spinner"></div><span>Giriş yapılıyor...</span>';
+
+            try {
+                const result = await signIn(email, password);
+
+                if (result.error) {
+                    showModalAlert('loginModalAlert', 'error', getErrorMessage(result.error));
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = '<span>Giriş Yap</span>';
+                    return;
+                }
+
+                // Başarılı giriş
+                showModalAlert('loginModalAlert', 'success', 'Giriş başarılı! Hoş geldiniz.');
+
+                // Modal kapat ve toast göster
+                setTimeout(() => {
+                    closeAuthModal();
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = '<span>Giriş Yap</span>';
+
+                    if (typeof showToast === 'function') {
+                        const userName = result.data?.user?.user_metadata?.full_name ||
+                            result.data?.user?.email?.split('@')[0] || 'Kullanıcı';
+                        showToast(`Hoş geldiniz, ${userName}! 👋`);
+                    }
+                }, 1000);
+
+            } catch (error) {
+                console.error('Login modal error:', error);
+                showModalAlert('loginModalAlert', 'error', 'Bir hata oluştu. Lütfen tekrar deneyin.');
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<span>Giriş Yap</span>';
+            }
+        });
+    }
+
+    // Register Modal Form Submit
+    const registerForm = document.getElementById('registerModalForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const fullName = document.getElementById('registerName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerPasswordConfirm').value;
+            const terms = document.getElementById('registerTerms').checked;
+            const registerBtn = document.getElementById('registerModalBtn');
+
+            // Validasyonlar
+            if (password !== confirmPassword) {
+                showModalAlert('registerModalAlert', 'error', 'Şifreler eşleşmiyor');
+                return;
+            }
+
+            if (password.length < 6) {
+                showModalAlert('registerModalAlert', 'error', 'Şifre en az 6 karakter olmalıdır');
+                return;
+            }
+
+            if (!terms) {
+                showModalAlert('registerModalAlert', 'error', 'Kullanım şartlarını kabul etmelisiniz');
+                return;
+            }
+
+            // Buton loading state
+            registerBtn.disabled = true;
+            registerBtn.innerHTML = '<div class="spinner"></div><span>Kayıt yapılıyor...</span>';
+
+            try {
+                const result = await signUp(email, password, fullName);
+
+                if (result.error) {
+                    showModalAlert('registerModalAlert', 'error', getErrorMessage(result.error));
+                    registerBtn.disabled = false;
+                    registerBtn.innerHTML = '<span>Kayıt Ol</span>';
+                    return;
+                }
+
+                // E-posta zaten kayıtlı kontrolü
+                if (result.data?.user?.identities?.length === 0) {
+                    showModalAlert('registerModalAlert', 'error', 'Bu e-posta adresi zaten kayıtlı');
+                    registerBtn.disabled = false;
+                    registerBtn.innerHTML = '<span>Kayıt Ol</span>';
+                    return;
+                }
+
+                // Başarılı kayıt - otomatik giriş dene (e-posta onayı kapalıysa)
+                try {
+                    const supabase = window.getSupabase();
+                    if (supabase) {
+                        const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+                            email: email,
+                            password: password
+                        });
+
+                        if (!signInError && signInData?.session) {
+                            showModalAlert('registerModalAlert', 'success', 'Kayıt başarılı! Hoş geldiniz.');
+
+                            setTimeout(() => {
+                                closeAuthModal();
+                                registerBtn.disabled = false;
+                                registerBtn.innerHTML = '<span>Kayıt Ol</span>';
+
+                                if (typeof showToast === 'function') {
+                                    showToast(`Hoş geldiniz, ${fullName}! 🎉`);
+                                }
+                            }, 1000);
+                            return;
+                        }
+                    }
+                } catch (e) {
+                    console.log('Auto login after register failed:', e);
+                }
+
+                // Otomatik giriş başarısızsa login'e yönlendir
+                showModalAlert('registerModalAlert', 'success', 'Kayıt başarılı! Şimdi giriş yapabilirsiniz.');
+                registerBtn.innerHTML = '<span>Kayıt Tamamlandı</span>';
+
+                setTimeout(() => {
+                    switchToLogin();
+                    registerBtn.disabled = false;
+                    registerBtn.innerHTML = '<span>Kayıt Ol</span>';
+                }, 1500);
+
+            } catch (error) {
+                console.error('Register modal error:', error);
+                showModalAlert('registerModalAlert', 'error', 'Bir hata oluştu. Lütfen tekrar deneyin.');
+                registerBtn.disabled = false;
+                registerBtn.innerHTML = '<span>Kayıt Ol</span>';
+            }
+        });
+    }
+
+    // Google Login (Modal)
+    const googleLoginBtn = document.getElementById('googleLoginModal');
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener('click', async () => {
+            const supabase = window.getSupabase();
+            if (!supabase) {
+                showModalAlert('loginModalAlert', 'error', 'Bağlantı hatası');
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase.auth.signInWithOAuth({
+                    provider: 'google',
+                    options: {
+                        redirectTo: window.location.origin + '/index.html'
+                    }
+                });
+
+                if (error) {
+                    showModalAlert('loginModalAlert', 'error', 'Google ile giriş yapılamadı: ' + error.message);
+                }
+            } catch (error) {
+                console.error('Google login modal error:', error);
+                showModalAlert('loginModalAlert', 'error', 'Bir hata oluştu');
+            }
+        });
+    }
+
+    // ESC tuşu ile modal kapat
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const overlay = document.getElementById('authModalOverlay');
+            if (overlay?.classList.contains('active')) {
+                closeAuthModal();
+            }
+        }
+    });
+
+    // Overlay'e tıklayınca kapat
+    const overlay = document.getElementById('authModalOverlay');
+    if (overlay) {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closeAuthModal();
+            }
+        });
+    }
+});
+
+// ==========================================
+// MODAL FONKSİYONLARI - GLOBAL ERİŞİM
+// ==========================================
+
+window.openLoginModal = openLoginModal;
+window.openRegisterModal = openRegisterModal;
+window.closeAuthModal = closeAuthModal;
+window.switchToRegister = switchToRegister;
+window.switchToLogin = switchToLogin;
+window.togglePasswordVisibility = togglePasswordVisibility;
+window.showModalAlert = showModalAlert;
+
+// ==========================================
+// MOBİL HESAP BUTONU HANDLERİ
+// ==========================================
+
+/**
+ * Mobil bottom nav'daki hesap butonunu işle
+ * - Giriş yapmışsa account.html'e git
+ * - Giriş yapmamışsa login modal aç
+ */
+function handleMobileAccountClick() {
+    const user = getCurrentUser();
+
+    if (user) {
+        // Giriş yapmış - hesap sayfasına git
+        window.location.href = 'account.html';
+    } else {
+        // Giriş yapmamış - login modal aç
+        openLoginModal();
+    }
+}
+
+window.handleMobileAccountClick = handleMobileAccountClick;

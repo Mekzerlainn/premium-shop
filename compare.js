@@ -81,14 +81,22 @@ function addToCompareById(productId) {
     }
 }
 
-// Toast mesajı (Eğer script.js'teki yoksa basit bir fallback)
-/* Not: script.js içindeki showToast fonksiyonunu kullanır. 
-   Eğer o yoksa konsola yazar. */
-function showToast(message, type = 'info') {
+// Toast mesajı (Güvenli Wrapper)
+// Eğer script.js içindeki showToast yüklü değilse basit bir konsol çıktısı ver
+function safeShowToast(message, type = 'info') {
     if (typeof window.showToast === 'function') {
         window.showToast(message, type);
     } else {
-        console.log(`[${type.toUpperCase()}] ${message}`);
-        // alert(message); // Alert rahatsız etmesin
+        console.log(`[${type ? type.toUpperCase() : 'INFO'}] ${message}`);
     }
+}
+
+// showToast fonksiyonunu global olarak ezmek yerine, 
+// dosya içinde safeShowToast kullanmak daha güvenli olurdu ama
+// diğer kodlar showToast çağırıyor olabilir.
+// O yüzden global showToast yoksa tanımlayalım:
+if (typeof window.showToast === 'undefined') {
+    window.showToast = function (message, type) {
+        console.log(`[${type ? type.toUpperCase() : 'INFO'}] ${message}`);
+    };
 }

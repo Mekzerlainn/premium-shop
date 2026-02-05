@@ -10,12 +10,22 @@ const SUPABASE_CONFIG = {
 };
 
 // Supabase client global erişim için
-let supabase = null;
+// let supabase = null; // KALDIRILDI: Syntax error'a neden oluyor
 
 // Supabase Client'ı başlat
 function initSupabase() {
+    // Kütüphane yüklü mü kontrol et (window.supabase kütüphane objesidir)
     if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
-        supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+        // Client oluştur
+        const client = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+
+        // Global erişim için window.supabase'i client ile güncelle (auth.js uyumluluğu için)
+        // Orijinal kütüphaneyi _supabaseLib olarak sakla (gerekirse)
+        if (!window._supabaseLib) {
+            window._supabaseLib = window.supabase;
+        }
+        window.supabase = client;
+
         console.log('✅ Supabase bağlantısı başarılı');
         return true;
     } else {
@@ -25,6 +35,7 @@ function initSupabase() {
 }
 
 // Global erişim için
+// Global erişim için
 window.SUPABASE_CONFIG = SUPABASE_CONFIG;
-window.getSupabase = () => supabase;
+window.getSupabase = () => window.supabase; // Artık client window.supabase içinde
 window.initSupabase = initSupabase;

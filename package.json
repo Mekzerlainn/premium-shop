@@ -1,0 +1,24 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "account.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mekzerlainn/premium-shop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mekzerlainn/premium-shop/issues"
+  },
+  "homepage": "https://github.com/Mekzerlainn/premium-shop#readme",
+  "dependencies": {
+    "playwright": "^1.58.1"
+  }
+}

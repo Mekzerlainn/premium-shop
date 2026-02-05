@@ -1,0 +1,6 @@
+node_modules/
+*.png
+test_*.js
+test_*.png
+*.log
+.DS_Store
